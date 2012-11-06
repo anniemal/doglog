@@ -1,0 +1,29 @@
+USERS
+user_id: int
+email: string
+password: password
+age (optional): int
+gender (optional) : varchar
+zip_code (optional): int
+
+
+MOVIES
+movie_id: int
+movie_title: string
+release_date: datetime
+IMDB_url: string
+
+
+
+RATINGS
+id: int
+user_id: int
+movie_id: int
+rating: int
+
+
+USERS has many ratings
+Rating belongs to one user
+Movies has many ratings
+rating belongs to one movie
+
