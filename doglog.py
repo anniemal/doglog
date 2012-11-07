@@ -18,7 +18,8 @@ app.config.from_object(__name__)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    error=""
+    return render_template("index.html", error=error)
 
 @app.route("/login", methods=["GET","POST"])
 def login():
@@ -44,20 +45,16 @@ def authenticate():
             session['user_id']=logged_in_user.id
             return redirect ("/dogowner")
     except: 
-        flash("Invalid user id")
-        return redirect("/new_user")  
+        error="Sorry, wrong email address/password. Please re-try logging in, or create a new account."
+        return render_template("/index.html", error=error)  
 
-@app.route("/new_user", methods=["GET","POST"])
-def new_user():
-    return render_template("new_user.html")
+@app.route("/dogwalkers_reg", methods=["GET","POST"])
+def dogwalkers_reg():
+    return render_template("dogwalkers_reg.html")
 
-@app.route("/dogwalker", methods=["GET","POST"])
-def dogwalker():
-    return render_template("dogwalker.html")
-
-@app.route("/dogowner", methods=["GET","POST"])
-def dogowner():
-    return render_template("dogowner.html")
+@app.route("/dogowners_reg", methods=["GET","POST"])
+def dogowners_reg():
+    return render_template("dogowners_reg.html")
 
 if __name__ == "__main__":
     app.run(debug = True)

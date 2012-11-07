@@ -26,20 +26,26 @@
         <br>
         <br>
         <div id="login">
-        <form action="{{ url_for ("authenticate") }}" method="POST">
+            <p>{{error}}</p>
+            <p>Sign In</p>
 
-            Email Address: <input class = "login_input" type="text" name="Email Address" placeholder="Enter e-mail address">
+        <form class ="form-horizontal" action="{{ url_for ("authenticate") }}" method="POST">
 
-            Password: <input class = "login_input" type="password" name="Password" placeholder="Password">
+            Email Address: <input type="text" name="email" placeholder="Enter e-mail address">
+
+            Password: <input  type="password" name="password" placeholder="Password">
             <input id="button_login" type="submit" value="Log In">
 
         </form>
 
 </div>
+<div class ="form-inline" id="dog owner start">
+<p>Register and get loggin'!</p>
+<a class="btn btn-large btn-success" href="{{ url_for ("dogowners_reg") }}">Dog Owners</a>
+<a class="btn btn-large btn-success" href="{{ url_for ("dogwalkers_reg") }}">Dog Walkers</a>
 
-        
-      </div>
-
+</div>
+ 
       <hr>
 
       <div class="row-fluid marketing">
