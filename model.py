@@ -13,12 +13,12 @@ class DogWalker(Base):
 
     __tablename__ = "dogwalkers"
     id = Column(Integer, primary_key=True)
-    user_email = Column(String(64), nullable=False)
+    email = Column(String(64), nullable=False)
     password = Column(String(64), nullable=False)
 
 
-    def __init__(self, user_email, password):
-        self.user_email = user_email
+    def __init__(self,email, password):
+        self.email = user_email
         self.password = password
         
 class  DogOwner(Base):
@@ -28,13 +28,14 @@ class  DogOwner(Base):
     id = Column(Integer, primary_key=True)
     dog_owner_email = Column(String(64), nullable=False)
     password = Column(String(64), nullable=False)
-    dog_owner_name = Column(String(64), nullable=True)
-    dog_owner_name = Column(Integer, nullable=True)
-    emergency_name = Column(String(64), nullable=True)
-    emergency_phone = Column(Integer, nullable=True)
-    vet_name = Column(String(64), nullable=True)
-    vet_phone = Column(Integer, nullable=True)
-    dog_walker_id = Column(Integer, ForeignKey('dogwalkers.id'))
+    dog_owner_first_name = Column(String(64), nullable=False)
+    dog_owner_last_name = Column(String(64), nullable=False)
+    dog_owner_phone=Column(Integer,nullable=False)
+    emergency_name = Column(String(64), nullable=False)
+    emergency_phone = Column(Integer, nullable=False)
+    vet_name = Column(String(64), nullable=False)
+    vet_phone = Column(Integer, nullable=False)
+    dog_walker_id = Column(String, ForeignKey('dogwalkers.id'))
 
     dogwalker = relationship("DogWalker", backref=backref("dogwalkers", order_by=id))
 
@@ -44,10 +45,9 @@ class Dog(Base):
 
     id = Column(Integer, primary_key=True)
     dog_owner_id = Column(Integer, ForeignKey('dogowners.id'))
-    dog_name = Column(String(64), nullable=True)
-    dog_breed = Column(String(64), nullable=True)
-    dog_food = Column(String(64), nullable=True)
-    dog_special_needs = Column(String(64), nullable=True)
+    dog_name = Column(String(64), nullable=False)
+    dog_breed = Column(String(64), nullable=False)
+    dog_special_needs = Column(String(64), nullable=False)
 
     dog = relationship("DogOwner", backref=backref ("dogs", order_by=id))
 
@@ -59,7 +59,7 @@ class Event(Base):
     event_type = Column(String(64), nullable=False)
     location_lat = Column(Float(Precision=64), nullable=False)
     location_log = Column(Float(Precision=64), nullable=False)
-    status = Column(Integer, nullable=True)
+    status = Column(Integer, nullable=False)
     notes = Column(String(64), nullable=False) 
     event_pic_url=Column(String(64),nullable=True)
     walk_id = Column(Integer, ForeignKey('walks.id'))
