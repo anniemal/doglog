@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<!DOCTYPE html>
+
+
+  <body>
+
+    <div class="container-narrow">
+
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <h3 class="muted">Log your Dog</h3>
+      </div>
+
+      <hr>
+
+      <div class="jumbotron">
+        <h1>dog log</h1>
+        <br>
+        <h2>log your dog walks, logs and more.</h2>
+        <br>
+        <br>
+        <div id="login">
+        <form action="{{ url_for ("authenticate") }}" method="POST">
+
+            Email Address: <input class = "login_input" type="text" name="Email Address" placeholder="Enter e-mail address">
+
+            Password: <input class = "login_input" type="password" name="Password" placeholder="Password">
+            <input id="button_login" type="submit" value="Log In">
+
+        </form>
+
+</div>
+
+        
+      </div>
+
+      <hr>
+
+      <div class="row-fluid marketing">
+        <div class="span6">
+          <h4>Dog Owners</h4>
+          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+        </div>
+
+        <div class="span6">
+          <h4>Dog Walkers</h4>
+          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+      </div>
+
+      <hr>
+
+      <div class="footer">
+        <p>&copy; doglog 2012</p>
+      </div>
+
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+    
+
+  </body>
+</html>
+
+
+
+
+{% endblock %}

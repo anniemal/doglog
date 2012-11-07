@@ -1,0 +1,24 @@
+{% extends "skaffold_layout.html" %}
+{% block body %}
+{% if not units %}
+<h2>No records found</h2>
+{% else %}
+<table>
+    <tr>
+        {% for prop in properties %}
+        <th>{{ prop.key }}</th>
+        {% endfor %}
+        <th>Actions</th>
+    </tr>
+    {% for unit in units %}
+    <tr>
+        {% for prop in properties %}
+        <td>{{ unit.getattr(prop.key) }}</td>
+        {% endfor %}
+        <td><a href="{{url_for(view_url, id=unit.id)}}">View</a> <a href="{{url_for(edit_url, id=unit.id)}}">Edit</a>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+<a href="{{url_for(new_url)}}">Create New Record</a>
+{% endblock %}

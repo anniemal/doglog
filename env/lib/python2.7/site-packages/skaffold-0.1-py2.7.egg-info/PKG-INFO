@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: skaffold
+Version: 0.1
+Summary: Flask/SQLAlchemy Admin Scaffold
+Home-page: http://chriszf.github.com/skaffold
+Author: Christian Fernandez
+Author-email: chriszf@gmail.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: any

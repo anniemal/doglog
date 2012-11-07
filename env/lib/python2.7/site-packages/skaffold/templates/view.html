@@ -1,0 +1,11 @@
+{% extends "skaffold_layout.html" %}
+
+{% block body %}
+<a href="{{url_for(edit_url, id=unit.id)}}">Edit</a>
+{% for prop in properties %}
+<div class="attr">
+    <h3>{{prop.key.capitalize()}}</h3>
+    <p>{{ unit.getattr(prop.key) }}</p>
+</div>
+{% endfor %}
+{% endblock %}

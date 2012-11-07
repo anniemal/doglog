@@ -1,78 +1,96 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, DateTime, Text, ForeignKey, Float
 from sqlalchemy.orm import sessionmaker, relationship, backref, scoped_session
 
-engine = create_engine("sqlite:///ratings.db", echo=False)
+engine = create_engine("sqlite:///doglog.db", echo=False)
 session = scoped_session(sessionmaker(bind=engine, autocommit=False, autoflush=False))
 
 Base = declarative_base()
 Base.query = session.query_property()
 
-### Class declarations go here
+class DogWalker(Base):
 
-class User(Base):
-
-    __tablename__="Users"
-
+    __tablename__ = "dogwalkers"
     id = Column(Integer, primary_key=True)
-    age = Column(Integer, nullable=True)
-    zipcode = Column(String(15), nullable=True)
-    email = Column(String(64), nullable=True)
-    password = Column(String(64), nullable=True)
+    user_email = Column(String(64), nullable=False)
+    password = Column(String(64), nullable=False)
 
-    def __init__(self, age, zipcode, email=None, password=None):
-        self.age = age
-        self.zipcode = zipcode
-        self.email = email
+
+    def __init__(self, user_email, password):
+        self.user_email = user_email
         self.password = password
+        
+class  DogOwner(Base):
 
-
-class Movie(Base):
-
-    __tablename__="Movies"
-
-    id=Column(Integer, primary_key=True)
-    movie_title=Column(String(64), nullable=False)
-    release_date= Column(DateTime, nullable=False)
-    IMDB_url=Column(String(64), nullable=True)
-
-    def __init__(self,movie_title, release_date, IMDB_url=None):
-        self.movie_title= movie_title
-        self.release_date=release_date
-        self.IMDB_url=IMDB_url
-
-class Rating(Base):
-
-    __tablename__ = "Ratings"
+    __tablename__ = "dogowners"
 
     id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('Users.id'))
-    movie_id = Column(Integer, ForeignKey('Movies.id'))
-    rating = Column(Integer)
+    dog_owner_email = Column(String(64), nullable=False)
+    password = Column(String(64), nullable=False)
+    dog_owner_name = Column(String(64), nullable=True)
+    dog_owner_name = Column(Integer, nullable=True)
+    emergency_name = Column(String(64), nullable=True)
+    emergency_phone = Column(Integer, nullable=True)
+    vet_name = Column(String(64), nullable=True)
+    vet_phone = Column(Integer, nullable=True)
+    dog_walker_id = Column(Integer, ForeignKey('dogwalkers.id'))
 
-    #define these attributes, linked from another table
-    user = relationship ("User", backref=backref("ratings", order_by=id))
-    movie = relationship("Movie", backref=backref("ratings", order_by=id))
+    dogwalker = relationship("DogWalker", backref=backref("dogwalkers", order_by=id))
 
-    def __init__(self, user_id, movie_id, rating):
-        self.user_id = user_id
-        self.movie_id = movie_id
-        self.rating = rating
+class Dog(Base):
 
+    __tablename__ = "dogs"
 
-### End class declarations
+    id = Column(Integer, primary_key=True)
+    dog_owner_id = Column(Integer, ForeignKey('dogowners.id'))
+    dog_name = Column(String(64), nullable=True)
+    dog_breed = Column(String(64), nullable=True)
+    dog_food = Column(String(64), nullable=True)
+    dog_special_needs = Column(String(64), nullable=True)
 
-def connect():
-    """We moved this outside the function to the top"""
-    # global ENGINE
-    # global Session
+    dog = relationship("DogOwner", backref=backref ("dogs", order_by=id))
 
-    # ENGINE = create_engine("sqlite:///ratings.db", echo=True)
-    # Session = sessionmaker(bind=ENGINE)
+class Event(Base):
 
-    # return Session()
-    pass
+    __tablename__ = "events"
+
+    id = Column(Integer, primary_key=True)
+    event_type = Column(String(64), nullable=False)
+    location_lat = Column(Float(Precision=64), nullable=False)
+    location_log = Column(Float(Precision=64), nullable=False)
+    status = Column(Integer, nullable=True)
+    notes = Column(String(64), nullable=False) 
+    event_pic_url=Column(String(64),nullable=True)
+    walk_id = Column(Integer, ForeignKey('walks.id'))
+    dog_id = Column(Integer, ForeignKey('dogs.id'))
+
+    walk = relationship("Walk", backref=backref ("events", order_by=id))
+    dog = relationship("Dog", backref=backref ("events", order_by=id))
+
+class Walk(Base):
+
+    __tablename__ = "walks"
+
+    id = Column(Integer, primary_key=True)
+    dog_walker_id = Column(Integer, ForeignKey('dogwalkers.id'))
+    obedience_rating = Column(Integer, nullable=False)
+    dog_mood = Column(Integer, nullable=False)
+    start_time = Column(DateTime, nullable=False)
+    end_time = Column(DateTime, nullable=False)
+    walk_location=Column(Text, nullable=False)
+    dogwalker = relationship("DogWalker", backref=backref ("walks", order_by=id))
+
+class DogsOnWalk(Base):
+
+    __tablename__ = "dogsonwalks"
+
+    id = Column(Integer, primary_key=True)
+    walk_id = Column(Integer, ForeignKey('walks.id'))
+    dog_id = Column(Integer, ForeignKey('dogs.id'))  
+
+    walk = relationship("Walk", backref=backref ("dogsonwalks", order_by=id))
+    dog = relationship("Dog", backref=backref ("dogsonwalks", order_by=id))
 
 
 def main():
