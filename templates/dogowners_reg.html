@@ -9,46 +9,46 @@
 <br>
 <p>Tell us about yourself...</p>
 <br>
-<form class="form-horizontal">
+<form class="form-horizontal" action='{{url_for ("save_user")}}'>
   <div class="control-group">
     <label class="control-label" for="input_First_Name">First Name</label>
     <div class="controls">
-      <input type="text" id="input_first_name" placeholder="First Name">
+      <input type="text" name="input_first_name" placeholder="First Name">
     </div>
   </div>
 
   <div class="control-group">
     <label class="control-label" for="input_last_name">Last Name</label>
     <div class="controls">
-      <input type="text" id="input_last_name" placeholder="Last Name">
+      <input type="text" name="input_last_name" placeholder="Last Name">
     </div>
     </div>
 
     <div class="control-group">
     <label class="control-label" for="input_phone">Phone Number</label>
     <div class="controls">
-      <input type="tel" id="input_phone" placeholder="(xxx)xxx-xxxx">
+      <input type="tel" name="input_phone" placeholder="(xxx)xxx-xxxx">
     </div>
     </div>
 
       <div class="control-group">
     <label class="control-label" for="input_email">E-mail Address</label>
     <div class="controls">
-      <input type="text" id="input_email_address" placeholder="your.email@address.com">
+      <input type="text" name="input_email" placeholder="dogowners.email@address.com">
     </div>
     </div>
 
      <div class="control-group">
     <label class="control-label" for="input_password">Password</label>
     <div class="controls">
-    <input type="password" id="input_password" placeholder="Password">
+    <input type="password" name="input_password" placeholder="Password">
     </div>
     </div>
 
      <div class="control-group">
     <label class="control-label" for="input_emergency_contact">Emergency Contact</label>
     <div class="controls">
-      <input type="text" id="input_emergency_contact" placeholder="Friend/Family Name">
+      <input type="text" name="input_emergency_contact" placeholder="Friend/Family Name">
     </div>
     </div>
 
@@ -56,7 +56,7 @@
   <div class="control-group">
     <label class="control-label" for="input_contact_phone">Contact Phone Number</label>
     <div class="controls">
-      <input type="text" id="input_contact_phone" placeholder="(xxx)xxx-xxxx">
+      <input type="text" name="input_contact_phone" placeholder="(xxx)xxx-xxxx">
     </div>
   </div>
   <br>
@@ -65,7 +65,7 @@
 <div class="control-group">
     <label class="control-label" for="input_dog_name">Dog Name</label>
     <div class="controls">
-    <input type="text" id="input_dog_name" placeholder="What You Call Your Dog">
+    <input type="text" id="input_dog_name" placeholder="Pup's Name">
     </div>
     </div>
 
@@ -77,24 +77,38 @@
     </div>
 
      <div class="control-group">
-    <label class="control-label" for="input_dog_breed">Dog Breed</label>
+    <label class="control-label" for="input_breed">Dog Breed</label>
     <div class="controls">
-    <input type="text" id="input_dog_breed" placeholder="What kind of dog is Molly/Xena?">
+    <input type="text" id="input_breed" placeholder="What kind of dog is Molly/Xena?">
     </div>
     </div>
+
+ <div class="control-group">
+    <label class="control-label" for="input_vet_name">Veterinarian</label>
+    <div class="controls">
+      <input type="text" id="input_vet_name" placeholder="Vet's name/animal hospital">
+    </div>
+    </div>
+
+     <div class="control-group">
+    <label class="control-label" for="input_vet_phone">Vet Phone</label>
+    <div class="controls">
+      <input type="text" id="input_vet_phone" placeholder="Vet Phone (xxx)xxx-xxxx">
+    </div>
+    </div>
+
 
 <div class="control-group">
     <label class="control-label" for="input_needs">Dog Needs</label>
     <div class="controls">
-    <textarea rows="5"><placeholder="Does your dog need feeding? Water freshened? Medication?"></textarea>
+    <textarea rows="5"><placeholder="Enter dog's feeding needs/water/medication requirements."></textarea>
     </div>
     </div>
-</form>
 
 <div class="form-actions">
-  <button type="submit" class="btn btn-primary">Save Changes</button>
+  <button type="submit" class="btn btn-primary">Submit</button>
   <button type="button" class="btn">Cancel</button>
 </div>
-
+</form>
 
 {% endblock %}

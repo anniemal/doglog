@@ -13,31 +13,28 @@ class DogWalker(Base):
 
     __tablename__ = "dogwalkers"
     id = Column(Integer, primary_key=True)
+    first_name=Column(String(64),nullable=False)
+    last_name=Column(String(64),nullable=False)
+    company_name=Column(String(64),nullable=True)
+    phone_number=Column(Integer,nullable=False)
     email = Column(String(64), nullable=False)
     password = Column(String(64), nullable=False)
 
-
-    def __init__(self,email, password):
-        self.email = user_email
-        self.password = password
         
 class  DogOwner(Base):
 
     __tablename__ = "dogowners"
 
     id = Column(Integer, primary_key=True)
-    dog_owner_email = Column(String(64), nullable=False)
-    password = Column(String(64), nullable=False)
-    dog_owner_first_name = Column(String(64), nullable=False)
-    dog_owner_last_name = Column(String(64), nullable=False)
-    dog_owner_phone=Column(Integer,nullable=False)
-    emergency_name = Column(String(64), nullable=False)
-    emergency_phone = Column(Integer, nullable=False)
+    first_name = Column(String(64), nullable=False)
+    last_name = Column(String(64), nullable=False)
+    phone_number=Column(Integer,nullable=False)
+    email = Column(String(64), nullable=False)
+    emergency_contact = Column(String(64), nullable=False)
+    contact_phone = Column(Integer, nullable=False)
     vet_name = Column(String(64), nullable=False)
     vet_phone = Column(Integer, nullable=False)
-    dog_walker_id = Column(String, ForeignKey('dogwalkers.id'))
-
-    dogwalker = relationship("DogWalker", backref=backref("dogwalkers", order_by=id))
+   
 
 class Dog(Base):
 
@@ -46,8 +43,10 @@ class Dog(Base):
     id = Column(Integer, primary_key=True)
     dog_owner_id = Column(Integer, ForeignKey('dogowners.id'))
     dog_name = Column(String(64), nullable=False)
-    dog_breed = Column(String(64), nullable=False)
+    sex=Column(Integer, nullable=False)
+    breed = Column(String(64), nullable=False)
     dog_special_needs = Column(String(64), nullable=False)
+  
 
     dog = relationship("DogOwner", backref=backref ("dogs", order_by=id))
 
@@ -80,6 +79,7 @@ class Walk(Base):
     end_time = Column(DateTime, nullable=False)
     walk_location=Column(Text, nullable=False)
     dogwalker = relationship("DogWalker", backref=backref ("walks", order_by=id))
+
 
 class DogsOnWalk(Base):
 
