@@ -13,13 +13,12 @@ class DogWalker(Base):
 
     __tablename__ = "dogwalkers"
     id = Column(Integer, primary_key=True)
-    first_name=Column(String(64),nullable=False)
-    last_name=Column(String(64),nullable=False)
-    company_name=Column(String(64),nullable=True)
-    phone_number=Column(Integer,nullable=False)
+    first_name = Column(String(64),nullable=False)
+    last_name = Column(String(64),nullable=False)
+    company_name = Column(String(64),nullable=True)
+    phone_number = Column(Integer,nullable=False)
     email = Column(String(64), nullable=False)
     password = Column(String(64), nullable=False)
-
         
 class  DogOwner(Base):
 
@@ -34,19 +33,20 @@ class  DogOwner(Base):
     contact_phone = Column(Integer, nullable=False)
     vet_name = Column(String(64), nullable=False)
     vet_phone = Column(Integer, nullable=False)
-   
+    dogwalker_id = Column(Integer, ForeignKey('dogwalkers.id'))
+
+    dogowner = relationship("DogWalker", backref=backref ("dogowners", order_by=id))
 
 class Dog(Base):
 
     __tablename__ = "dogs"
 
     id = Column(Integer, primary_key=True)
-    dog_owner_id = Column(Integer, ForeignKey('dogowners.id'))
+    owner_id = Column(Integer, ForeignKey('dogowners.id'))
     dog_name = Column(String(64), nullable=False)
     sex=Column(Integer, nullable=False)
     breed = Column(String(64), nullable=False)
-    dog_special_needs = Column(String(64), nullable=False)
-  
+    needs = Column(String(64), nullable=False)
 
     dog = relationship("DogOwner", backref=backref ("dogs", order_by=id))
 

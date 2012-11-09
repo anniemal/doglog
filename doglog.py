@@ -7,13 +7,6 @@ app = Flask(__name__)
 SECRET_KEY = 'power_pose'
 app.config.from_object(__name__)
 
-# Skaffold(app, model.DogWalker, session)
-# Skaffold(app, model.DogOwner, session)
-# Skaffold(app, model.Dog, session)
-# Skaffold(app, model.Event, session)-
-# Skaffold(app, model.Walk, session)
-# Skaffold(app, model.DogsOnWalk, session)
-
 @app.route("/")
 def index():
     error=""
@@ -65,59 +58,87 @@ def save_user():
     email=request.form['input_email']
     password=request.form['input_password']
 
- 
-    # emergency_contact=request.form['input_emergency_contact']
-    # contact_number=request.form['input_contact_phone']
-    # vet_name=request.form['input_vet_name']
-    # vet_phone=request.form['input_vet_phone']
-    # dog_walker_email=request.form['input_email_dog_walker']
-    # dog_name=request.form['input_dog_name']
-    # sex=request.form['input_sex']
-    # breed=request.form['input_breed']
-    # needs=request.form['input_needs']
-
     new_user=model.DogWalker(first_name=first_name,last_name=last_name,company_name=company_name,phone_number=phone_number,email=email,password=password)
     model.session.add(new_user)
     model.session.commit()
+    session['user_id']=new_user.id
     return redirect("/add_owner")
     
-@app.route("/add_owner")
+@app.route("/add_owner",methods=["GET","POST"])
 def add_owner():
 
     return render_template("add_owner.html")
 
-@app.route("/save_owner")
+@app.route("/dog_info/<int:owner_id>/<int:dog_id>",methods=["GET","POST"])
+def dog_info(owner_id,dog_id):
+
+    tup=get_sidebar()
+    dog=model.session.query(model.Dog).filter_by(id=dog_id).one()
+    dogowner=model.session.query(model.DogOwner).filter_by(id=owner_id).one()
+
+    return render_template("dog_info.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],dog=dog,dogowner=dogowner )
+
+@app.route("/save_owner",methods=["GET","POST"])
 def save_owner():
     # DogOwner Table information
-    print "1"
+   
     first_name=request.form['first_name']
     last_name=request.form['last_name']
-    print "2"
+    
     phone_number=request.form['phone_number']
     email=request.form['email']
     emergency_contact=request.form['emergency_contact']
-    contact_number=request.form['contact_phone']
+    contact_phone=request.form['contact_phone']
     vet_name=request.form['vet_name']
     vet_phone=request.form['vet_phone']
     #Dog Table information
-    print "3"
+   
     dog_name=request.form['dog_name']
     sex=request.form['sex']
     breed=request.form['breed']
     needs=request.form['needs']
-    print "te"
+  
     new_owner=model.DogOwner(first_name=first_name,last_name=last_name,phone_number=phone_number,email=email, emergency_contact=emergency_contact,\
-        contact_number=contact_number,vet_name=vet_name,vet_phone=vet_phone)
+        contact_phone=contact_phone,vet_name=vet_name,vet_phone=vet_phone, dogwalker_id=session['user_id'])
     model.session.add(new_owner)
     model.session.commit()
-    print "here"
+    
     new_dog=model.Dog(owner_id=new_owner.id,dog_name=dog_name,sex=sex,breed=breed,needs=needs)
     model.session.add(new_dog)
     model.session.commit()
-    print "there"
 
-    return render_template("log_log.html")
+    return redirect("/log")
 
+def get_sidebar():
+    user_id=session['user_id']
+    user=model.session.query(model.DogWalker).get(user_id)
+    owners=model.session.query(model.DogOwner).filter_by(dogwalker_id=user_id).all()
+    owners_id=[]
+    for owner in owners:
+        owners_id.append(owner.id)
+    print owners_id
+    dogs={}
+    for owner in owners_id:
+        dogs[owner]=model.session.query(model.Dog).filter_by(owner_id=owner).all()
+    tup=(user.first_name,owners_id,dogs,owners)
+    return tup
+
+@app.route("/log")
+def log():
+    # user_id=session['user_id']
+    # user=model.session.query(model.DogWalker).get(user_id)
+    # owners=model.session.query(model.DogOwner).filter_by(dogwalker_id=user_id).all()
+    # owners_id=[]
+    # for owner in owners:
+    #     owners_id.append(owner.id)
+    # print owners_id
+    # dogs={}
+    # for owner in owners_id:
+    #     dogs[owner]=model.session.query(model.Dog).filter_by(owner_id=owner).all()
+    # print dogs
+    # return render_template("log_log.html",first_name=user.first_name,owners_id=owners_id,dogs=dogs,owners=owners)
+    tup=get_sidebar()
+    return render_template("log_log.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3])
 @app.route("/save_dogs")
 def save_dogs():
     return render_template("log_dog.html")
