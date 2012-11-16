@@ -1,6 +1,6 @@
-from flask import Flask, render_template, redirect, request, session, flash
+from flask import Flask, render_template, redirect, request, session, flash, jsonify
 import model
-from skaffold import Skaffold
+import sqlalchemy
 
 app = Flask(__name__)
 
@@ -9,7 +9,7 @@ app.config.from_object(__name__)
 
 @app.route("/")
 def index():
-    error=""
+    error = ""
     return render_template("index.html", error=error)
 
 @app.route("/login", methods=["GET","POST"])
@@ -31,14 +31,30 @@ def authenticate():
         if logged_in_user:
             session['user_id']=logged_in_user.id
             return redirect ("/dogwalker")
-        logged_in_user=model.session.query(model.DogOwner).select((DogOwner.email==email) & (DogOwner.password==password))
-        if logged_in_user:    
-            session['user_id']=logged_in_user.id
-            return redirect ("/dogowner")
     except: 
         error="Sorry, wrong email address/password. Please re-try logging in, or create a new account."
         return render_template("/index.html", error=error)  
 
+@app.route("/m_authenticate", methods=["GET","POST"])
+def m_authenticate():
+    print "here"
+    print request.form
+    email = request.form['email']
+    password = request.form['password']
+    print email
+    print password
+    ## Check to see if user is a dogwalker    
+    results = model.session.query(model.DogWalker).filter(model.DogWalker.email==email).filter(model.DogWalker.password==password).all()
+    if len(results) == 1:
+        logged_in_user=results[0]
+        print logged_in_user
+        if logged_in_user:
+            logged_in_user_id=jsonify(user_id=logged_in_user.id)
+            print logged_in_user_id
+            return logged_in_user_id
+    else:
+        return jsonify(error="Sorry, wrong email/password. Please try logging in or create a new account.")
+         
 @app.route("/user_reg", methods=["GET","POST"])
 def user_reg():
     return render_template("user_reg.html")
@@ -49,7 +65,7 @@ def dogowners_reg():
 
 @app.route("/save_user", methods=["GET","POST"])
 def save_user():
-    print "here"
+
     first_name=request.form['input_first_name']
 
     last_name=request.form['input_last_name']
@@ -57,7 +73,8 @@ def save_user():
     phone_number=request.form['input_phone']
     email=request.form['input_email']
     password=request.form['input_password']
-
+    print email
+    print password
     new_user=model.DogWalker(first_name=first_name,last_name=last_name,company_name=company_name,phone_number=phone_number,email=email,password=password)
     model.session.add(new_user)
     model.session.commit()
@@ -144,4 +161,4 @@ def save_dogs():
     return render_template("log_dog.html")
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run('0.0.0.0', debug = True)
