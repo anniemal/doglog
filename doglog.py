@@ -80,6 +80,23 @@ def save_user():
     model.session.commit()
     session['user_id']=new_user.id
     return redirect("/add_owner")
+
+@app.route("/m_save_user", methods=["GET","POST"])
+def m_save_user():
+
+    first_name=request.form['first_name']
+    last_name=request.form['last_name']
+    company_name=request.form['company_name']
+    phone_number=request.form['phone']
+    email=request.form['new_user_email']
+    password=request.form['new_user_password']
+    print email
+    print password
+    new_user=model.DogWalker(first_name=first_name,last_name=last_name,company_name=company_name,phone_number=phone_number,email=email,password=password)
+    model.session.add(new_user)
+    model.session.commit()
+    new_user_id=jsonify(user_id=new_user.id)
+    return new_user_id
     
 @app.route("/add_owner",methods=["GET","POST"])
 def add_owner():
