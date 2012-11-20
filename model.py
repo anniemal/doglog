@@ -56,8 +56,8 @@ class Event(Base):
 
     id = Column(Integer, primary_key=True)
     event_type = Column(String(64), nullable=False)
-    location_lat = Column(Float(Precision=64), nullable=False)
-    location_log = Column(Float(Precision=64), nullable=False)
+    location_lat = Column(Float, nullable=False)
+    location_log = Column(Float, nullable=False)
     status = Column(Integer, nullable=False)
     notes = Column(String(64), nullable=False) 
     event_pic_url = Column(String(64),nullable=True)
@@ -78,6 +78,8 @@ class Walk(Base):
     start_time = Column(DateTime, nullable=False)
     end_time = Column(DateTime, nullable=False)
     walk_location = Column(Text, nullable=False)
+    elapsed_distance = Column(Float, nullable=False)
+    elapsed_time = Column(String(64),nullable=False)
     dogwalker = relationship("DogWalker", backref=backref ("walks", order_by=id))
 
 
