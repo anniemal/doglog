@@ -1,6 +1,11 @@
 from flask import Flask, render_template, redirect, request, session, flash, jsonify
 import model
 import sqlalchemy
+import json
+import datetime
+from sqlalchemy import DateTime
+import time
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -67,7 +72,6 @@ def dogowners_reg():
 def save_user():
 
     first_name=request.form['input_first_name']
-
     last_name=request.form['input_last_name']
     company_name=request.form['input_company_name']
     phone_number=request.form['input_phone']
@@ -88,8 +92,8 @@ def m_save_user():
     last_name=request.form['last_name']
     company_name=request.form['company_name']
     phone_number=request.form['phone']
-    email=request.form['new_user_email']
-    password=request.form['new_user_password']
+    email=request.form['email']
+    password=request.form['password']
     print email
     print password
     new_user=model.DogWalker(first_name=first_name,last_name=last_name,company_name=company_name,phone_number=phone_number,email=email,password=password)
@@ -97,7 +101,33 @@ def m_save_user():
     model.session.commit()
     new_user_id=jsonify(user_id=new_user.id)
     return new_user_id
+
+@app.route("/m_save_map", methods=["GET", "POST"])
+def m_save_map():   
+    string_json=request.form['json_vals']
+    json_obj=json.loads(string_json)
+    dog_walker_id=json_obj['dogwalker_id']
+    print dog_walker_id
+    obedience_rating=json_obj['obedience_rating']
+    print obedience_rating
+    dog_mood=json_obj['dog_mood']
+    print dog_mood
+    start_time=json_obj['start_time']
     
+    start_time = datetime.strptime(start_time[0:19],"%Y-%m-%dT%H:%M:%S")
+    print start_time
+    end_time=json_obj['end_time']
+    print end_time
+    end_time =datetime.strptime(end_time[0:19],"%Y-%m-%dT%H:%M:%S")
+    walk_location=json_obj['walk_location']
+    walk_location=str(walk_location)
+    print walk_location
+    new_walk=model.Walk(dog_walker_id=dog_walker_id,obedience_rating=obedience_rating,dog_mood=dog_mood,start_time=start_time, \
+        end_time=end_time,walk_location=walk_location)
+    model.session.add(new_walk)
+    model.session.commit()
+    return "success"
+
 @app.route("/add_owner",methods=["GET","POST"])
 def add_owner():
 
@@ -154,7 +184,7 @@ def get_sidebar():
     dogs={}
     for owner in owners_id:
         dogs[owner]=model.session.query(model.Dog).filter_by(owner_id=owner).all()
-    tup=(user.first_name,owners_id,dogs,owners)
+    tup=(user.first_name,owners_id,dogs,owners,user.id)
     return tup
 
 @app.route("/log")
@@ -172,7 +202,7 @@ def log():
     # print dogs
     # return render_template("log_log.html",first_name=user.first_name,owners_id=owners_id,dogs=dogs,owners=owners)
     tup=get_sidebar()
-    return render_template("log_log.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3])
+    return render_template("log_log.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],user_id=tup[4])
 @app.route("/save_dogs")
 def save_dogs():
     return render_template("log_dog.html")
