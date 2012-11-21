@@ -50,7 +50,7 @@ def m_authenticate():
     password = request.form['password']
     print email
     print password
-    ## Check to see if user is a dogwalker    
+   
     results = model.session.query(model.DogWalker).filter(model.DogWalker.email==email).filter(model.DogWalker.password==password).all()
     if len(results) == 1:
         logged_in_user=results[0]
@@ -60,7 +60,7 @@ def m_authenticate():
             print logged_in_user_id
             return logged_in_user_id
     else:
-        return jsonify(error="Sorry, wrong email/password. Please try logging in or create a new account.")
+        return jsonify(user_id="error")
          
 @app.route("/user_reg", methods=["GET","POST"])
 def user_reg():
@@ -122,10 +122,10 @@ def m_save_map():
     print end_time
     end_time =datetime.strptime(end_time[0:19],"%Y-%m-%dT%H:%M:%S")
     walk_location=json_obj['walk_location']
-    walk_location=str(walk_location)
-    elapsed_distance = total_mi_rounded
+    walk_location=json.dumps(walk_location)
+    elapsed_distance = json_obj['elapsed_distance']
     print elapsed_distance 
-    elapsed_time = total_time
+    elapsed_time = json_obj['elapsed_time']
     print elapsed_time
     print walk_location
     new_walk=model.Walk(dog_walker_id=dog_walker_id,obedience_rating=obedience_rating,dog_mood=dog_mood,start_time=start_time, \
@@ -199,18 +199,20 @@ def log():
     walks=model.session.query(model.Walk).filter_by(dog_walker_id=tup[4]).all()
     walks_as_dict=[]
     for walk in walks:
-        walk_as_dict = { \
+        walk_as_dict = { 
+            'walk_id': walk.id, \
             'dog_walker_id' : walk.dog_walker_id, \
             'obedience_rating' : walk.obedience_rating, \
             'dog_mood' : walk.dog_mood, \
             'start_time' : str(walk.start_time), \
             'end_time' : str(walk.end_time), \
-            'walk_location' : walk.walk_location} 
+            'walk_location' : walk.walk_location, \
+            'elapsed_distance' :walk.elapsed_distance, \
+            'elapsed_time' : walk.elapsed_time}
+
         walks_as_dict.append(walk_as_dict)
 
     json_walks=json.dumps(walks_as_dict)
-    print json_walks
-
     # for owner in owners:
     #     owners_id.append(owner.id)
     # print owners_id
@@ -220,7 +222,7 @@ def log():
     # print dogs
     # return render_template("log_log.html",first_name=user.first_name,owners_id=owners_id,dogs=dogs,owners=owners)
  
-    return render_template("log_log.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],user_id=tup[4])
+    return render_template("log_log.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],user_id=tup[4], json_walks=json_walks)
 @app.route("/save_dogs")
 def save_dogs():
     return render_template("log_dog.html")

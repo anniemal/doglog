@@ -1,70 +1,45 @@
+$(function() {
+
+
 // Find the track_id of the workout they are viewing
-$.getJSON($SCRIPT_ROOT + '/log_log', json_data, function(json_data);
+	console.log(json_walks);
+
+	// data = JSON.parse(json_walks);
+	data = json_walks;
 	
-	// Get all the GPS data for the specific workout
-	// var data = window.localStorage.getItem(key);
-	
-	// Turn the stringified GPS data back into a JS object
+	latest_walk = data[data.length-1];
+	console.log(latest_walk);
 
-	data = JSON.parse(json_data);
-	tracking_data=data.walk_location;
+	tracking_data=latest_walk['walk_location'];
+	console.log(tracking_data);
+	tracking_data=JSON.parse(tracking_data);
+	console.log(tracking_data);
+	var lat_lng=[];
+	for (var i=0;i<tracking_data.length;i++)
+	{
+		start_walk=tracking_data[i];
+		lat=start_walk['ab'];
+		lng=start_walk['$a'];
 
+		myLatLng=new google.maps.LatLng(lng,lat);
+		lat_lng.push(myLatLng);
+	}
+	var myOptions = {
+	      zoom: 15,
+	      center:lat_lng[0],
+	      mapTypeId: google.maps.MapTypeId.ROADMAP
+	    };
+  
+  	console.log(lat_lng[0]);
+    //Create the Google Map, set options
+   var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
-	// Calculate the total distance travelled
-	// total_km = 0;
+   	var new_path = new google.maps.Polyline({
+      path: lat_lng,
+      strokeColor: "#FF0000",
+      strokeOpacity: 1.0,
+      strokeWeight: 2
+   	});
+   	new_path.setMap(map);
 
-	// for(i = 0; i < data.length; i++){
-	    
-	    // if(i == (data.length - 1)){
-	        // break;
-	    }
-	    
-	    // total_km += gps_distance(data[i].coords.latitude, data[i].coords.longitude, data[i+1].coords.latitude, data[i+1].coords.longitude);
-	// }
-	
-	// total_km_rounded = total_km.toFixed(2);
-	
-	// Calculate the total time taken for the track
-	// start_time = new Date(data[0].timestamp).getTime();
-	// end_time = new Date(data[data.length-1].timestamp).getTime();
-
-	// total_time_ms = end_time - start_time;
-	// total_time_s = total_time_ms / 1000;
-	
-	// final_time_m = Math.floor(total_time_s / 60);
-	// final_time_s = total_time_s - (final_time_m * 60);
-
-	// Display total distance and time
-	// $("#track_info_info").html('Travelled <strong>' + total_km_rounded + '</strong> km in <strong>' + final_time_m + 'm</strong> and <strong>' + final_time_s + 's</strong>');
-	
-	// Set the initial Lat and Long of the Google Map
-	var myLatLng = new google.maps.LatLng(data[0].coords.latitude, data[0].coords.longitude);
-
-	// Google Map options
-	// var myOptions = {
- //      zoom: 15,
- //      center: myLatLng,
- //      mapTypeId: google.maps.MapTypeId.ROADMAP
- //    };
-
-    // Create the Google Map, set options
-    // var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-
-    // var trackCoords = [];
-    
-    // Add each GPS entry to an array
-    // for(i=0; i<data.length; i++){
-    	// trackCoords.push(new google.maps.LatLng(data[i].coords.latitude, data[i].coords.longitude));
-    // }
-    
-    // Plot the GPS entries as a line on the Google Map
-    // var trackPath = new google.maps.Polyline({
-    //   path: trackCoords,
-    //   strokeColor: "#FF0000",
-    //   strokeOpacity: 1.0,
-    //   strokeWeight: 2
-    // });
-
-    // Apply the line to the map
-    // trackPath.setMap(map);
-   
+  });

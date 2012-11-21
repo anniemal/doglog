@@ -80,6 +80,11 @@ img {
   max-width: none;
 }
 
+#map_canvas { 
+  width: 400px;
+  height: 400px;
+}
+
 button,
 input,
 select,
