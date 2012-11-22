@@ -7,7 +7,7 @@ from sqlalchemy import DateTime
 import time
 from datetime import datetime
 import string
-from flask.ext.sqlalchemy import sqlalchemy
+from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 db=SQLAlchemy(app)
