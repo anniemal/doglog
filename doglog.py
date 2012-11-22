@@ -8,7 +8,6 @@ import time
 from datetime import datetime
 import string
 from flask.ext.sqlalchemy import sqlalchemy
-from flask_heroku import Heroku
 
 app = Flask(__name__)
 db=SQLAlchemy(app)
