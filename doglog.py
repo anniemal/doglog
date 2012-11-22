@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, render_template, redirect, request, session, flash, jsonify
 import model
 import sqlalchemy
