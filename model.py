@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy import Column, Integer, String, DateTime, Text, ForeignKey, Float
 from sqlalchemy.orm import sessionmaker, relationship, backref, scoped_session
 
-engine = create_engine("sqlite:///doglog.db", echo=False)
+engine = create_engine("postgresql:///doglog.db", echo=False)
 session = scoped_session(sessionmaker(bind=engine, autocommit=False, autoflush=False))
 
 Base = declarative_base()
@@ -80,8 +80,9 @@ class Walk(Base):
     walk_location = Column(Text, nullable=False)
     elapsed_distance = Column(Float, nullable=False)
     elapsed_time = Column(String(64),nullable=False)
+    events=Column(Text, nullable=True)
+    walk_pic_url = Column(String(64),nullable=True)
     dogwalker = relationship("DogWalker", backref=backref ("walks", order_by=id))
-
 
 class DogsOnWalk(Base):
 
@@ -90,7 +91,6 @@ class DogsOnWalk(Base):
     id = Column(Integer, primary_key=True)
     walk_id = Column(Integer, ForeignKey('walks.id'))
     dog_id = Column(Integer, ForeignKey('dogs.id'))  
-
     walk = relationship("Walk", backref=backref ("dogsonwalks", order_by=id))
     dog = relationship("Dog", backref=backref ("dogsonwalks", order_by=id))
 

@@ -7,10 +7,14 @@ from sqlalchemy import DateTime
 import time
 from datetime import datetime
 import string
+from flask.ext.sqlalchemy import sqlalchemy
+from flask_heroku import Heroku
+
 app = Flask(__name__)
+heroku=Heroku(app)
 
 SECRET_KEY = 'power_pose'
-app.config.from_object(__name__)
+app.config['SQLALCHEMY_DATABASE_URL']=os.environ['DATEBASE_URL']
 
 @app.route("/")
 def index():
@@ -126,6 +130,8 @@ def m_save_map():
     elapsed_distance = json_obj['elapsed_distance']
     print elapsed_distance 
     elapsed_time = json_obj['elapsed_time']
+    event_data=json_obj['events']
+    print event_data
     print elapsed_time
     print walk_location
     new_walk=model.Walk(dog_walker_id=dog_walker_id,obedience_rating=obedience_rating,dog_mood=dog_mood,start_time=start_time, \
