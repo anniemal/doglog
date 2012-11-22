@@ -11,8 +11,7 @@ from flask.ext.sqlalchemy import sqlalchemy
 from flask_heroku import Heroku
 
 app = Flask(__name__)
-heroku=Heroku(app)
-
+db=SQLAlchemy(app)
 SECRET_KEY = 'power_pose'
 app.config['SQLALCHEMY_DATABASE_URL']=os.environ['DATEBASE_URL']
 
