@@ -11,10 +11,11 @@ from datetime import datetime
 import string
 from flask.ext.sqlalchemy import SQLAlchemy
 
-app = Flask(__name__)
-db=SQLAlchemy(app)
 SECRET_KEY = 'power_pose'
-app.config['SQLALCHEMY_DATABASE_URL']=os.environ['DATEBASE_URL']
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+db=SQLAlchemy(app)
 
 @app.route("/")
 def index():
