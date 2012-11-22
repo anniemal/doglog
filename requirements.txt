@@ -7,3 +7,4 @@ WTForms==1.0.2
 Werkzeug==0.8.3
 distribute==0.6.28
 wsgiref==0.1.2
+psycopg2==2.4.5
