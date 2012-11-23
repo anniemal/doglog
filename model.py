@@ -3,7 +3,10 @@ from sqlalchemy import create_engine
 from sqlalchemy import Column, Integer, String, DateTime, Text, ForeignKey, Float
 from sqlalchemy.orm import sessionmaker, relationship, backref, scoped_session
 
-engine = create_engine('postgres://sqqxezvvtpnoke:qiiiGdm_uZmFzDx-l8eVsdd4Ga@ec2-107-22-167-10.compute-1.amazonaws.com:5432/dv8ggqk5552d4')
+# engine = create_engine('sqlite:///doglog.db', echo=True)
+engine = create_engine('postgres://fbmeonssjnsllt:7KwsryhcboUyw-A4CHtDdFRGr_@ec2-23-21-193-224.compute-1.amazonaws.com:5432/d3vpq3jau75jlb', echo=True)
+
+# engine = create_engine('postgresql+psycopg2://postgres:letterscleo@localhost:5432/doglog', echo=True)
 session = scoped_session(sessionmaker(bind=engine, autocommit=False, autoflush=False))
 
 Base = declarative_base()
@@ -50,22 +53,22 @@ class Dog(Base):
 
     dog = relationship("DogOwner", backref=backref ("dogs", order_by=id))
 
-class Event(Base):
+# class Event(Base):
 
-    __tablename__ = "events"
+#     __tablename__ = "events"
 
-    id = Column(Integer, primary_key=True)
-    event_type = Column(String(64), nullable=False)
-    location_lat = Column(Float, nullable=False)
-    location_log = Column(Float, nullable=False)
-    status = Column(Integer, nullable=False)
-    notes = Column(String(64), nullable=False) 
-    event_pic_url = Column(String(64),nullable=True)
-    walk_id = Column(Integer, ForeignKey('walks.id'))
-    dog_id = Column(Integer, ForeignKey('dogs.id'))
+#     id = Column(Integer, primary_key=True)
+#     event_type = Column(String(64), nullable=False)
+#     location_lat = Column(Float, nullable=False)
+#     location_log = Column(Float, nullable=False)
+#     status = Column(Integer, nullable=False)
+#     notes = Column(String(64), nullable=False) 
+#     event_pic_url = Column(String(64),nullable=True)
+    # walk_id = Column(Integer, ForeignKey('walks.id'))
+    # dog_id = Column(Integer, ForeignKey('dogs.id'))
 
-    walk = relationship("Walk", backref=backref ("events", order_by=id))
-    dog = relationship("Dog", backref=backref ("events", order_by=id))
+    # walk = relationship("Walk", backref=backref ("events", order_by=id))
+    # dog = relationship("Dog", backref=backref ("events", order_by=id))
 
 class Walk(Base):
 
@@ -84,15 +87,15 @@ class Walk(Base):
     walk_pic_url = Column(String(64),nullable=True)
     dogwalker = relationship("DogWalker", backref=backref ("walks", order_by=id))
 
-class DogsOnWalk(Base):
+# class DogsOnWalk(Base):
 
-    __tablename__ = "dogsonwalks"
+#     __tablename__ = "dogsonwalks"
 
-    id = Column(Integer, primary_key=True)
-    walk_id = Column(Integer, ForeignKey('walks.id'))
-    dog_id = Column(Integer, ForeignKey('dogs.id'))  
-    walk = relationship("Walk", backref=backref ("dogsonwalks", order_by=id))
-    dog = relationship("Dog", backref=backref ("dogsonwalks", order_by=id))
+#     id = Column(Integer, primary_key=True)
+#     walk_id = Column(Integer, ForeignKey('walks.id'))
+#     dog_id = Column(Integer, ForeignKey('dogs.id'))  
+#     walk = relationship("Walk", backref=backref ("dogsonwalks", order_by=id))
+#     dog = relationship("Dog", backref=backref ("dogsonwalks", order_by=id))
 
 
 def main():

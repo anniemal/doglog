@@ -14,8 +14,11 @@ from flask.ext.sqlalchemy import SQLAlchemy
 SECRET_KEY = 'power_pose'
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
-db=SQLAlchemy(app)
+app.config.from_object(__name__)
+
+
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+# db=SQLAlchemy(app)
 
 @app.route("/")
 def index():
@@ -135,8 +138,9 @@ def m_save_map():
     print event_data
     print elapsed_time
     print walk_location
+    walk_pic_url='kjsdf'
     new_walk=model.Walk(dog_walker_id=dog_walker_id,obedience_rating=obedience_rating,dog_mood=dog_mood,start_time=start_time, \
-        end_time=end_time,walk_location=walk_location,elapsed_distance=elapsed_distance,elapsed_time=elapsed_time)
+        end_time=end_time,walk_location=walk_location,elapsed_distance=elapsed_distance,elapsed_time=elapsed_time, events=event_data, walk_pic_url=pic)
     model.session.add(new_walk)
     model.session.commit()
     return "success"
@@ -235,5 +239,4 @@ def save_dogs():
     return render_template("log_dog.html")
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 5000))
-    app.run('0.0.0.0',port=port, debug = True)
+    app.run('0.0.0.0', debug = True)
