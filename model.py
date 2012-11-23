@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy import Column, Integer, String, DateTime, Text, ForeignKey, Float
 from sqlalchemy.orm import sessionmaker, relationship, backref, scoped_session
 
-engine = create_engine("postgresql:///doglog.db", echo=False)
+engine = create_engine('postgresql+psycopg2://kaboomfox:p00p00p@127.0.0.1:5432/doglog')
 session = scoped_session(sessionmaker(bind=engine, autocommit=False, autoflush=False))
 
 Base = declarative_base()
