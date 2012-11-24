@@ -1,6 +1,6 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
-from sqlalchemy import Column, Integer, String, DateTime, Text, ForeignKey, Float
+from sqlalchemy import Column, Integer, String, DateTime, Text, ForeignKey, Float, BigInteger
 from sqlalchemy.orm import sessionmaker, relationship, backref, scoped_session
 import os
 # engine = create_engine('sqlite:///doglog.db', echo=True)
