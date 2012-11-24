@@ -1,0 +1,5 @@
+LD_LIBRARY_PATH=/Library/PostgreSQL/9.2/lib
+export LD_LIBRARY_PATH
+
+PATH=/Library/PostgreSQL/9.2/bin:$PATH
+export PATH
