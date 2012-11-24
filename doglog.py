@@ -238,5 +238,9 @@ def log():
 def save_dogs():
     return render_template("log_dog.html")
 
-if __name__ == "__main__":
-    app.run('0.0.0.0', debug = True)
+
+if _name_ == "_main_":
+       port = int(os.environ.get('PORT', 5000))
+       app.debug = True
+       app.run(host='0.0.0.0', port=port, debug=true)
+    
