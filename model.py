@@ -17,11 +17,11 @@ Base.query = session.query_property()
 class DogWalker(Base):
 
     __tablename__ = "dogwalkers"
-    id = Column(Integer, primary_key=True)
+    id = Column(BigInteger, primary_key=True)
     first_name = Column(String(64),nullable=False)
     last_name = Column(String(64),nullable=False)
     company_name = Column(String(64),nullable=True)
-    phone_number = Column(Integer,nullable=False)
+    phone_number = Column(BigInteger,nullable=False)
     email = Column(String(64), nullable=False)
     password = Column(String(64), nullable=False)
         
@@ -29,16 +29,16 @@ class  DogOwner(Base):
 
     __tablename__ = "dogowners"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(BigInteger, primary_key=True)
     first_name = Column(String(64), nullable=False)
     last_name = Column(String(64), nullable=False)
-    phone_number=Column(Integer,nullable=False)
+    phone_number=Column(BigInteger,nullable=False)
     email = Column(String(64), nullable=False)
     emergency_contact = Column(String(64), nullable=False)
-    contact_phone = Column(Integer, nullable=False)
+    contact_phone = Column(BigInteger, nullable=False)
     vet_name = Column(String(64), nullable=False)
-    vet_phone = Column(Integer, nullable=False)
-    dogwalker_id = Column(Integer, ForeignKey('dogwalkers.id'))
+    vet_phone = Column(BigInteger, nullable=False)
+    dogwalker_id = Column(BigInteger, ForeignKey('dogwalkers.id'))
 
     dogowner = relationship("DogWalker", backref=backref ("dogowners", order_by=id))
 
@@ -46,8 +46,8 @@ class Dog(Base):
 
     __tablename__ = "dogs"
 
-    id = Column(Integer, primary_key=True)
-    owner_id = Column(Integer, ForeignKey('dogowners.id'))
+    id = Column(BigInteger, primary_key=True)
+    owner_id = Column(BigInteger, ForeignKey('dogowners.id'))
     dog_name = Column(String(64), nullable=False)
     sex=Column(Integer, nullable=False)
     breed = Column(String(64), nullable=False)
@@ -76,10 +76,10 @@ class Walk(Base):
 
     __tablename__ = "walks"
 
-    id = Column(Integer, primary_key=True)
-    dog_walker_id = Column(Integer, ForeignKey('dogwalkers.id'))
-    obedience_rating = Column(Integer, nullable=False)
-    dog_mood = Column(Integer, nullable=False)
+    id = Column(BigInteger, primary_key=True)
+    dog_walker_id = Column(BigInteger, ForeignKey('dogwalkers.id'))
+    obedience_rating = Column(BigInteger, nullable=False)
+    dog_mood = Column(BigInteger, nullable=False)
     start_time = Column(DateTime, nullable=False)
     end_time = Column(DateTime, nullable=False)
     walk_location = Column(Text, nullable=False)
@@ -100,6 +100,7 @@ class Walk(Base):
 #     dog = relationship("Dog", backref=backref ("dogsonwalks", order_by=id))
 def create_db():
     Base.metadata.create_all(engine)
+    return "success"
 
 def main():
     """In case we need this for something"""
