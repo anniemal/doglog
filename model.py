@@ -4,7 +4,7 @@ from sqlalchemy import Column, Integer, String, DateTime, Text, ForeignKey, Floa
 from sqlalchemy.orm import sessionmaker, relationship, backref, scoped_session
 
 # engine = create_engine('sqlite:///doglog.db', echo=True)
-engine = create_engine('postgres://fbmeonssjnsllt:7KwsryhcboUyw-A4CHtDdFRGr_@ec2-23-21-193-224.compute-1.amazonaws.com:5432/d3vpq3jau75jlb', echo=True)
+engine = create_engine('postgres://nbnuegzevwjkmo:RQI2BlBCzwJC7IC7lWObacrwEi@ec2-23-21-176-133.compute-1.amazonaws.com:5432/d5d5pi8c5rbhue', echo=True)
 
 # engine = create_engine('postgresql+psycopg2://postgres:letterscleo@localhost:5432/doglog', echo=True)
 session = scoped_session(sessionmaker(bind=engine, autocommit=False, autoflush=False))
@@ -96,7 +96,8 @@ class Walk(Base):
 #     dog_id = Column(Integer, ForeignKey('dogs.id'))  
 #     walk = relationship("Walk", backref=backref ("dogsonwalks", order_by=id))
 #     dog = relationship("Dog", backref=backref ("dogsonwalks", order_by=id))
-
+def create_db():
+    Base.metadata.create_all(engine)
 
 def main():
     """In case we need this for something"""
