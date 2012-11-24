@@ -239,8 +239,7 @@ def save_dogs():
     return render_template("log_dog.html")
 
 
-if _name_ == "_main_":
-       port = int(os.environ.get('PORT', 5000))
-       app.debug = True
-       app.run(host='0.0.0.0', port=port, debug=true)
-    
+if __name__ == "__main__":
+    port = int(os.environ.get('PORT', 5000))
+    app.debug = True
+    app.run(host='0.0.0.0', port=port)
