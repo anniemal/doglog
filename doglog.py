@@ -123,7 +123,6 @@ def m_save_map():
     dog_mood=json_obj['dog_mood']
     print dog_mood
     start_time=json_obj['start_time']
-    
     start_time = datetime.strptime(start_time[0:19],"%Y-%m-%dT%H:%M:%S")
     print start_time
     end_time=json_obj['end_time']
@@ -135,12 +134,14 @@ def m_save_map():
     print elapsed_distance 
     elapsed_time = json_obj['elapsed_time']
     event_data=json_obj['events']
+    event_data=json.dumps(event_data)
+    walk_pic_url=json_obj['walk_pic_url']
     print event_data
     print elapsed_time
     print walk_location
     walk_pic_url='kjsdf'
     new_walk=model.Walk(dog_walker_id=dog_walker_id,obedience_rating=obedience_rating,dog_mood=dog_mood,start_time=start_time, \
-        end_time=end_time,walk_location=walk_location,elapsed_distance=elapsed_distance,elapsed_time=elapsed_time, events=event_data, walk_pic_url=pic)
+        end_time=end_time,walk_location=walk_location,elapsed_distance=elapsed_distance,elapsed_time=elapsed_time, events=event_data, walk_pic_url=walk_pic_url)
     model.session.add(new_walk)
     model.session.commit()
     return "success"
@@ -219,7 +220,9 @@ def log():
             'end_time' : str(walk.end_time), \
             'walk_location' : walk.walk_location, \
             'elapsed_distance' :walk.elapsed_distance, \
-            'elapsed_time' : walk.elapsed_time}
+            'elapsed_time' : walk.elapsed_time, \
+            'events' : walk.events, \
+            'walk_pic_url' : walk.walk_pic_url}
 
         walks_as_dict.append(walk_as_dict)
 
