@@ -133,7 +133,7 @@ var frenemy_image='../static/img/dog_sad.gif';
 	}
 }
    	var new_path = new google.maps.Polyline({
-      path: lat_lng,
+      path: tracking_data,
       strokeColor: "#FF0000",
       strokeOpacity: 1.0,
       strokeWeight: 2
