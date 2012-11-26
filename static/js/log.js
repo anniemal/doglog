@@ -8,6 +8,7 @@ var poop_image = '../static/img/poop.png';
 var pee_image = '../static/img/pee.gif';
 var friend_image = '../static/img/dog_happy.gif';
 var frenemy_image='../static/img/dog_sad.gif';
+var lat_lng=[];
 
 // Find the track_id of the workout they are viewing
 	console.log(json_walks);
@@ -24,7 +25,6 @@ var frenemy_image='../static/img/dog_sad.gif';
 	console.log(tracking_data);
 	tracking_data=JSON.parse(tracking_data);
 	console.log(tracking_data);
-	var lat_lng=[];
 	
 
 
@@ -62,13 +62,13 @@ var frenemy_image='../static/img/dog_sad.gif';
 		{
 		poop_events.push(event_one['poop']);
 		}
-		else if (event_one['friend_events']!=null)
+		else if (event_one['friend']!=null)
 		{
-		friend_events.push(event_one['friend_events']);
+		friend_events.push(event_one['friend']);
 		}
-		else if (event_one['frenemy_events']);
+		else if (event_one['frenemy']);
 		{	
-		frenemy_events.push(event_one['frenemy_events']);
+		frenemy_events.push(event_one['frenemy']);
 		}
 	}
 
