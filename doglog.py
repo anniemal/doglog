@@ -227,16 +227,11 @@ def log():
         walks_as_dict.append(walk_as_dict)
 
     json_walks=json.dumps(walks_as_dict)
-    # for owner in owners:
-    #     owners_id.append(owner.id)
-    # print owners_id
-    # dogs={}
-    # for owner in owners_id:
-    #     dogs[owner]=model.session.query(model.Dog).filter_by(owner_id=owner).all()
-    # print dogs
-    # return render_template("log_log.html",first_name=user.first_name,owners_id=owners_id,dogs=dogs,owners=owners)
- 
-    return render_template("log_log.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],user_id=tup[4], json_walks=json_walks)
+    return render_template("log_log.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
+        user_id=tup[4], json_walks=json_walks, elapsed_time=walks_as_dict[-1]['elapsed_time'], obedience_rating=walks_as_dict[-1]['obedience_rating'], \
+        dog_mood=walks_as_dict[-1]['dog_mood'], elapsed_distance=walks_as_dict[-1]['elapsed_distance'], walk_pic_url=walks_as_dict[-1]['walk_pic_url'],\
+        start_time=walks_as_dict[-1]['start_time'])
+
 @app.route("/save_dogs")
 def save_dogs():
     return render_template("log_dog.html")
