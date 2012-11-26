@@ -25,18 +25,14 @@ var lat_lng=[];
 	console.log(tracking_data);
 	tracking_data=JSON.parse(tracking_data);
 	console.log(tracking_data);
-	
-
-
-		console.log(pee_events);
-		console.log(poop_events);
+	console.log(pee_events);
+	console.log(poop_events);
 
 	for (var i=0;i<tracking_data.length;i++)
 	{
 		start_walk=tracking_data[i];
 		lat=start_walk['ab'];
 		lng=start_walk['$a'];
-
 		myLatLng=new google.maps.LatLng(lng,lat);
 		lat_lng.push(myLatLng);
 	}
@@ -44,14 +40,12 @@ var lat_lng=[];
 	      zoom: 15,
 	      center:lat_lng[0],
 	      mapTypeId: google.maps.MapTypeId.ROADMAP
-	    };
-  
+	    }; 
   	console.log(lat_lng[0]);
     //Create the Google Map, set options
    	var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-
-
    	for (var i=0; i<events.length;i++)
+
 	{
 		event_one=events[i];
 		if (event_one['pee']!=null)
@@ -66,7 +60,7 @@ var lat_lng=[];
 		{
 		friend_events.push(event_one['friend']);
 		}
-		else if (event_one['frenemy']);
+		else if (event_one['frenemy']!=null)
 		{	
 		frenemy_events.push(event_one['frenemy']);
 		}
@@ -107,7 +101,7 @@ var lat_lng=[];
 	for (var i=0; i<friend_events.length;i++)
 	{
 	var type_location='friend_location'+i;
-	var friend_marker= 'friend_marker'+i;
+	var friend_marker='friend_marker'+i;
 	console.log(type_location);
   	type_location = new google.maps.LatLng(friend_events[i][0], friend_events[i][1]);
   	var friend_marker = new google.maps.Marker({
@@ -122,7 +116,7 @@ var lat_lng=[];
 	for (var i=0; i<frenemy_events.length;i++)
 	{
 	var type_location='frenemy_location'+i;
-	var frenemy_marker= 'frenemy_marker'+i;
+	var frenemy_marker='frenemy_marker'+i;
 	console.log(type_location);
   	type_location = new google.maps.LatLng(frenemy_events[i][0], frenemy_events[i][1]);
   	var frenemy_marker = new google.maps.Marker({
@@ -131,13 +125,14 @@ var lat_lng=[];
     	icon: frenemy_image
 		});
 	}
-}
+	}
+
    	var new_path = new google.maps.Polyline({
-      path: tracking_data,
+      path: lat_lng,
       strokeColor: "#FF0000",
       strokeOpacity: 1.0,
       strokeWeight: 2
    	});
-   	new_path.setMap(map);
 
+   	new_path.setMap(map);
   });
