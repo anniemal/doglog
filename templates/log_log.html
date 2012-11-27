@@ -63,7 +63,7 @@
         </div>
 
         <div>  
-          {% for walk in walks reverse %}
+          {% for walk in walks reversed %}
                 <li class="active"><a href="{{ url_for ('dog_info', owner_id=owner.id, dog_id=value.id) }}"> {{walk.start_time}} </a></li>
                 {% endfor %}
               {% endfor %}
