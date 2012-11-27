@@ -152,11 +152,8 @@ def m_save_map():
     client = TwilioRestClient(account, token)
 
     message = client.sms.messages.create(to="+15625474270", from_="+14155994769",\
-                                     body="%s wants me to tell you that she just had a walk! \
-                                     We walked for %d miles for %s time. \
-                                     I was a %d dog \
-                                     and today I'm in a %d mood.") %(dog.name, \
-                                     elapsed_distance, elapsed_time, obedience_rating, dog_mood)
+                                     body="%s wants to tell you that she walked for %d miles for %s time.") %(dog.name,
+                                     elapsed_distance, elapsed_time)
 
 
 
