@@ -207,30 +207,6 @@ def get_sidebar():
 
 @app.route("/log")
 def log():
-    # tup=get_sidebar()
-    # walks=model.session.query(model.Walk).filter_by(dog_walker_id=tup[4]).all()
-    # walks_as_dict=[]
-    # for walk in walks:
-    #     walk_as_dict = { 
-    #         'walk_id': walk.id, \
-    #         'dog_walker_id' : walk.dog_walker_id, \
-    #         'obedience_rating' : walk.obedience_rating, \
-    #         'dog_mood' : walk.dog_mood, \
-    #         'start_time' : str(walk.start_time), \
-    #         'end_time' : str(walk.end_time), \
-    #         'walk_location' : walk.walk_location, \
-    #         'elapsed_distance' :walk.elapsed_distance, \
-    #         'elapsed_time' : walk.elapsed_time, \
-    #         'events' : walk.events, \
-    #         'walk_pic_url' : walk.walk_pic_url}
-
-    #     walks_as_dict.append(walk_as_dict)
-
-    # json_walks=json.dumps(walks_as_dict)
-    # return render_template("log_log.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
-    #     user_id=tup[4], json_walks=json_walks, elapsed_time=walks_as_dict[-1]['elapsed_time'], obedience_rating=walks_as_dict[-1]['obedience_rating'], \
-    #     dog_mood=walks_as_dict[-1]['dog_mood'], elapsed_distance=walks_as_dict[-1]['elapsed_distance'], walk_pic_url=walks_as_dict[-1]['walk_pic_url'], walks=walks,\
-    #     start_time=walks_as_dict[-1]['start_time'])
     tup=get_sidebar()
     walks=model.session.query(model.Walk).filter_by(dog_walker_id=tup[4]).all()
     walk=model.session.query(model.Walk).filter_by(dog_walker_id=tup[4]).first()
@@ -278,12 +254,9 @@ def past_log(walk_id):
         dog_mood=walk_as_dict['dog_mood'], elapsed_distance=walk_as_dict['elapsed_distance'], walk_pic_url=walk_as_dict['walk_pic_url'], walks=walks,\
         start_time=walk_as_dict['start_time'])
 
-
-
 @app.route("/save_dogs")
 def save_dogs():
     return render_template("log_dog.html")
-
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
