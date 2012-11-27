@@ -23,7 +23,6 @@
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
               Loggin' as <a href="#" class="navbar-link">{{first_name}}</a>
-
             </p>
             <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
@@ -32,14 +31,11 @@
         </div>
       </div>
     </div>
-
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span3">
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
-             
-          
               {% for owner in owners %}
                 <li class="nav-header"> {{ owner.first_name }} {{ owner.last_name }}</li>
                 {% for value in dogs[owner.id] %}
@@ -57,26 +53,21 @@
           </div>
           <div>
             <ul>
-            <li> Image here </li>
+            <li> Image: here </li>
             <li> Distance: {{elapsed_distance}} </li>
             <li> Start Time: {{start_time}} </li>
-            <li> Total Time: {{elalpsed_time}} </li>
+            <li> Total Time: {{elapsed_time}} </li>
             <li> Dog Mood: {{dog_mood}} </li>
             <li> Obedience Rating: {{obedience_rating}} </li>
-            
           </ul>
         </div>
-
           </div><!--/row-->
         </div><!--/span-->
       </div><!--/row-->
-
       <hr>
-
       <footer>
         <p>&copy; doglog 2012</p>
       </footer>
-
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
