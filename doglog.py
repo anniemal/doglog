@@ -10,6 +10,7 @@ import time
 from datetime import datetime
 import string
 from flask.ext.sqlalchemy import SQLAlchemy
+from __future__ import unicode_literals
 
 SECRET_KEY = 'power_pose'
 
@@ -150,10 +151,10 @@ def m_save_map():
     account = "AC7225c1d30d2cce103ea56289e3fc6ed8"
     token = "6efbc4e502a9672e69fddf93c981cbbe"
     client = TwilioRestClient(account, token)
-    print type(dog.dog_name)
-    print type(elapsed_distance)
-    print type(elapsed_time)
-    message_str="%s walked for %f miles for %f time." % (dog.dog_name, elapsed_distance, elapsed_time)
+    print type(dog.dog_name.encode('utf-8'))
+    print type(elapsed_distance.encode('utf-8'))
+    print type(elapsed_time.encode('utf-8'))
+    message_str="%s walked for %s miles for %s time." % (dog.dog_name.encode('utf-8'), elapsed_distance.encode('utf-8'), elapsed_time.encode('utf-8'))
 
     print message_str
     message = client.sms.messages.create(to="+15625474270", from_="+14155994769", body=message_str) 
