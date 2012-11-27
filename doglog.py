@@ -10,7 +10,7 @@ import time
 from datetime import datetime
 import string
 from flask.ext.sqlalchemy import SQLAlchemy
-from __future__ import unicode_literals
+
 
 SECRET_KEY = 'power_pose'
 
