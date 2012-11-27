@@ -155,9 +155,8 @@ def m_save_map():
                                      body="%s wants me to tell you that she just had a walk! \
                                      We walked for %d miles for %s time. \
                                      I was a %d dog \
-                                     and today I'm in a %d mood.\
-                                     http://afternoon-ocean-9111.herokuapp.com/log/%r") %(dog.name, \
-                                     elapsed_distance, elapsed_time, obedience_rating, dog_mood, new_walk)
+                                     and today I'm in a %d mood.") %(dog.name, \
+                                     elapsed_distance, elapsed_time, obedience_rating, dog_mood)
 
 
 
