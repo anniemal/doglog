@@ -251,7 +251,7 @@ def past_log(walk_id):
         'events' : walk.events, \
         'walk_pic_url' : walk.walk_pic_url}
 
-    json_walks=json.dumps(walks_as_dict)
+    json_walks=json.dumps(walk_as_dict)
     return render_template("log_log.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
         user_id=tup[4], json_walks=json_walks, elapsed_time=walk_as_dict['elapsed_time'], obedience_rating=walk_as_dict['obedience_rating'], \
         dog_mood=walk_as_dict['dog_mood'], elapsed_distance=walk_as_dict['elapsed_distance'], walk_pic_url=walk_as_dict['walk_pic_url'], walks=walks,\
