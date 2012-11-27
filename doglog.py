@@ -145,7 +145,7 @@ def m_save_map():
     model.session.add(new_walk)
     model.session.commit()
 
-    owner=model.session.query(model.DogOwner).filter_by(dog_walker_id=dogwalker_id).one()
+    owner=model.session.query(model.DogOwner).filter_by(dogwalker_id=dog_walker_id).one()
     dog=model.session.query(model.Dog).filter_by(owner_id=owner.id).one()
     account = "AC7225c1d30d2cce103ea56289e3fc6ed8"
     token = "6efbc4e502a9672e69fddf93c981cbbe"
