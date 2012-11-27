@@ -61,6 +61,13 @@
             <li> Obedience Rating: {{obedience_rating}} </li>
           </ul>
         </div>
+
+        <div>  
+          {% for walk in walks reverse %}
+                <li class="active"><a href="{{ url_for ('dog_info', owner_id=owner.id, dog_id=value.id) }}"> {{walk.start_time}} </a></li>
+                {% endfor %}
+              {% endfor %}
+            </div>
           </div><!--/row-->
         </div><!--/span-->
       </div><!--/row-->
