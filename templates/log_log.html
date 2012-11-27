@@ -65,7 +65,7 @@
         <div>  
           {% for walk in walks %}
 
-                <li class="active"><a href="{{ url_for ('past_walk', walk_id=walk.id) }}"> {{walk.start_time}} </a></li>
+                <li class="active"><a href="{{ url_for ('past_log', walk_id=walk.id) }}"> {{walk.start_time}} </a></li>
         
           {% endfor %}
             </div>
