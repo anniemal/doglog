@@ -229,7 +229,7 @@ def log():
     json_walks=json.dumps(walks_as_dict)
     return render_template("log_log.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
         user_id=tup[4], json_walks=json_walks, elapsed_time=walks_as_dict[-1]['elapsed_time'], obedience_rating=walks_as_dict[-1]['obedience_rating'], \
-        dog_mood=walks_as_dict[-1]['dog_mood'], elapsed_distance=walks_as_dict[-1]['elapsed_distance'], walk_pic_url=walks_as_dict[-1]['walk_pic_url'], walks=walks\
+        dog_mood=walks_as_dict[-1]['dog_mood'], elapsed_distance=walks_as_dict[-1]['elapsed_distance'], walk_pic_url=walks_as_dict[-1]['walk_pic_url'], walks=walks,\
         start_time=walks_as_dict[-1]['start_time'])
 
 @app.route("/save_dogs")
