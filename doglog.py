@@ -145,7 +145,6 @@ def m_save_map():
         end_time=end_time,walk_location=walk_location,elapsed_distance=elapsed_distance,elapsed_time=elapsed_time, events=event_data, walk_pic_url=walk_pic_url)
     model.session.add(new_walk)
     model.session.commit()
-
     owner=model.session.query(model.DogOwner).filter_by(dogwalker_id=dog_walker_id).one()
     dog=model.session.query(model.Dog).filter_by(owner_id=owner.id).one()
     account = "AC7225c1d30d2cce103ea56289e3fc6ed8"
@@ -155,12 +154,8 @@ def m_save_map():
     print type(elapsed_distance.encode('utf-8'))
     print type(elapsed_time.encode('utf-8'))
     message_str="%s walked for %s miles for %s time." % (dog.dog_name.encode('utf-8'), elapsed_distance.encode('utf-8'), elapsed_time.encode('utf-8'))
-
-    print message_str
-    message = client.sms.messages.create(to="+15625474270", from_="+14155994769", body=message_str) 
-
-
-
+    dogowner_phone="+1%s" %(owner.phone_number.encode('utf-8'))
+    message = client.sms.messages.create(to=dogowner_phone, from_="+14155994769", body=message_str) 
     return "success"
 
 @app.route("/add_owner",methods=["GET","POST"])
