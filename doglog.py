@@ -232,7 +232,7 @@ def log():
         dog_mood=walks_as_dict[-1]['dog_mood'], elapsed_distance=walks_as_dict[-1]['elapsed_distance'], walk_pic_url=walks_as_dict[-1]['walk_pic_url'], walks=walks,\
         start_time=walks_as_dict[-1]['start_time'])
 
-@app.route("/past_log/<int:walk_id>",methods=["GET","POST"]
+@app.route("/past_log/<int:walk_id>",methods=["GET","POST"])
 def past_log(walk_id):
 
     tup=get_sidebar()
