@@ -145,12 +145,19 @@ def m_save_map():
     model.session.add(new_walk)
     model.session.commit()
 
+    owner=model.session.query(model.DogOwner).filter_by(dog_walker_id=dog_walker_id).one()
+    dog=model.session.query(model.Dog).filter_by(owner_id=owner.id).one()
     account = "AC7225c1d30d2cce103ea56289e3fc6ed8"
     token = "6efbc4e502a9672e69fddf93c981cbbe"
     client = TwilioRestClient(account, token)
 
     message = client.sms.messages.create(to="+15625474270", from_="+14155994769",\
-                                     body="Hey Xena wanted me to tell you she went on a walk!")
+                                     body="%s wants me to tell you that she just had a walk! \
+                                     We walked for %d miles for %s time. \
+                                     I was a %d dog \
+                                     and today I'm in a %d mood.\
+                                     http://afternoon-ocean-9111.herokuapp.com/log/%r") %(dog.name, \
+                                     elapsed_distance, elapsed_time, obedience_rating, dog_mood, new_walk)
 
 
 
