@@ -237,7 +237,7 @@ def past_log(walk_id):
 
     tup=get_sidebar()
     walks=model.session.query(model.Walk).filter_by(dog_walker_id=tup[4]).all()
-    walk=model.session.query(model.Walk).filter_by(id=walk_id)
+    walk=model.session.query(model.Walk).filter_by(id=walk_id).one()
     walk_as_dict = { 
         'walk_id': walk.id, \
         'dog_walker_id' : walk.dog_walker_id, \
