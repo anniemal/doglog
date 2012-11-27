@@ -63,10 +63,11 @@
         </div>
 
         <div>  
-          {% for walk in walks reversed %}
+          {% for walk in walks %}
+
                 <li class="active"><a href="{{ url_for ('dog_info', owner_id=owner.id, dog_id=value.id) }}"> {{walk.start_time}} </a></li>
-                {% endfor %}
-              {% endfor %}
+        
+          {% endfor %}
             </div>
           </div><!--/row-->
         </div><!--/span-->
