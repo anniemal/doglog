@@ -1,5 +1,5 @@
 import os
-
+from twilio.rest import TwilioRestClient
 from flask import Flask, render_template, redirect, request, session, flash, jsonify
 import model
 import sqlalchemy
@@ -144,6 +144,16 @@ def m_save_map():
         end_time=end_time,walk_location=walk_location,elapsed_distance=elapsed_distance,elapsed_time=elapsed_time, events=event_data, walk_pic_url=walk_pic_url)
     model.session.add(new_walk)
     model.session.commit()
+
+    account = "AC7225c1d30d2cce103ea56289e3fc6ed8"
+    token = "6efbc4e502a9672e69fddf93c981cbbe"
+    client = TwilioRestClient(account, token)
+
+    message = client.sms.messages.create(to="+15625474270", from_="+14155994769",\
+                                     body="Hey Xena wanted me to tell you she went on a walk!")
+
+
+
     return "success"
 
 @app.route("/add_owner",methods=["GET","POST"])
