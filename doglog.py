@@ -66,6 +66,7 @@ def m_authenticate():
         print logged_in_user
         if logged_in_user:
             logged_in_user_id=jsonify(user_id=logged_in_user.id)
+            session['user_id']=logged_in_user.id
             print logged_in_user_id
             return logged_in_user_id
     else:
@@ -111,6 +112,7 @@ def m_save_user():
     model.session.add(new_user)
     model.session.commit()
     new_user_id=jsonify(user_id=new_user.id)
+    session['user_id']=new_user.id
     return new_user_id
 
 @app.route("/m_save_map", methods=["GET", "POST"])
@@ -222,24 +224,28 @@ def log():
     tup=get_sidebar()
     walks=model.session.query(model.Walk).filter_by(dog_walker_id=tup[4]).all()
     walk=model.session.query(model.Walk).filter_by(dog_walker_id=tup[4]).first()
-    walk_as_dict = { 
-        'walk_id': walk.id, \
-        'dog_walker_id' : walk.dog_walker_id, \
-        'obedience_rating' : walk.obedience_rating, \
-        'dog_mood' : walk.dog_mood, \
-        'start_time' : str(walk.start_time), \
-        'end_time' : str(walk.end_time), \
-        'walk_location' : walk.walk_location, \
-        'elapsed_distance' :walk.elapsed_distance, \
-        'elapsed_time' : walk.elapsed_time, \
-        'events' : walk.events, \
-        'walk_pic_url' : walk.walk_pic_url}
+    if walk:
+        walk_as_dict = { 
+            'walk_id': walk.id, \
+            'dog_walker_id' : walk.dog_walker_id, \
+            'obedience_rating' : walk.obedience_rating, \
+            'dog_mood' : walk.dog_mood, \
+            'start_time' : str(walk.start_time), \
+            'end_time' : str(walk.end_time), \
+            'walk_location' : walk.walk_location, \
+            'elapsed_distance' :walk.elapsed_distance, \
+            'elapsed_time' : walk.elapsed_time, \
+            'events' : walk.events, \
+            'walk_pic_url' : walk.walk_pic_url}
 
-    json_walks=json.dumps(walk_as_dict)
-    return render_template("log_log.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
-        user_id=tup[4], json_walks=json_walks, elapsed_time=walk_as_dict['elapsed_time'], obedience_rating=walk_as_dict['obedience_rating'], \
-        dog_mood=walk_as_dict['dog_mood'], elapsed_distance=walk_as_dict['elapsed_distance'], walk_pic_url=walk_as_dict['walk_pic_url'], walks=walks,\
-        start_time=walk_as_dict['start_time'])
+        json_walks=json.dumps(walk_as_dict)
+        return render_template("log_log.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
+            user_id=tup[4], json_walks=json_walks, elapsed_time=walk_as_dict['elapsed_time'], obedience_rating=walk_as_dict['obedience_rating'], \
+            dog_mood=walk_as_dict['dog_mood'], elapsed_distance=walk_as_dict['elapsed_distance'], walk_pic_url=walk_as_dict['walk_pic_url'], walks=walks,\
+            start_time=walk_as_dict['start_time'])
+    else: 
+        return render_template("get_app.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
+            user_id=tup[4])
 
 @app.route("/past_log/<int:walk_id>",methods=["GET","POST"])
 def past_log(walk_id):

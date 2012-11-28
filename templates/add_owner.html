@@ -1,13 +1,12 @@
 {% extends "layout.html" %}
 {% block body %}
 
-<p>Get ready to Log your Dog!</p>
+<h2>Get ready to Log your Dog!</h2>
 <br>
-<p>Register your pup.</p>
+<h4>Tell us about the dogowner.</h4>
 <br>
-<p>Tell us about the pup you're walking...</p>
-<br>
-<form class="form-horizontal" action='{{url_for ("save_owner")}}' method="POST">
+<div class="form-signin">
+<form  action='{{url_for ("save_owner")}}' method="POST">
   <div class="control-group">
     <label class="control-label" for="first_name">First Name</label>
     <div class="controls">
@@ -49,11 +48,12 @@
       <input type="text" name="contact_phone" placeholder="(xxx)xxx-xxxx">
     </div>
   </div>
-  <br>
+  
+</div>
 
-<p>Now introduce your pup to us...</p>
+<h4>Now introduce your pup to us...</h4>
 
-
+<div class="form-signin">
 <div class="control-group">
     <label class="control-label" for="dog_name">Dog Name</label>
     <div class="controls">
@@ -93,14 +93,15 @@
 <div class="control-group">
     <label class="control-label" for="needs">Dog Needs</label>
     <div class="controls">
-    <textarea name ="needs" rows="5"><placeholder="Enter dog's feeding needs/water/medication requirements."></textarea>
+    <textarea name ="needs" type="textarea" rows="5" placeholder="Enter dog's feeding needs/water/medication requirements."> 
+    </textarea>
     </div>
     </div>
 
 <div class="form-actions">
   <button type="submit" class="btn btn-primary">Submit</button>
-  <button type="button" class="btn">Cancel</button>
 </div>
 </form>
+</div>
 
 {% endblock %}

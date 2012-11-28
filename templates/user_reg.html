@@ -3,13 +3,11 @@
 
 <!DOCTYPE html>
 
-<p>Welcome to Dog Log!</p>
-<br>
-<p>Register yourself as a dog walker!</p>
-<br>
-<p>Tell us about yourself...</p>
-<br>
-<form class="form-horizontal"  action="{{ url_for ("save_user") }}" method="POST">
+<h2>Register and Get Walkin'!</h2>
+<h4>Tell us about yourself...</h4>
+
+
+<form class="form-signin"  action="{{ url_for ("save_user") }}" method="POST">
   <div class="control-group">
     <label class="control-label" for="input_first_name">First Name</label>
     <div class="controls">
@@ -52,7 +50,7 @@
     </div>
     </div>
 
-<div class="form-actions">
+<div >
 <button type="submit" class="btn btn-primary">Submit</button>
 </div>
 </form>
