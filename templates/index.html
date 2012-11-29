@@ -13,6 +13,8 @@
       </div>
         <div class="container" id="login">
             <p>{{error}}</p>
+        <div class="row">
+        <div class="span5">
         <form class="form-signin" action="{{ url_for ("authenticate") }}" method="POST">
         <h2 class="form-signin-heading">Sign In</h2>
         <input type="text" class="input-block-level" name="email" placeholder="Email address">
@@ -22,6 +24,8 @@
         </label>
         
         <button class="btn btn-large btn-primary" id="button_login" type="submit">Sign in</button>
+        
+
    <!--    </form>
         <form class ="form-horizontal" action="{{ url_for ("authenticate") }}" method="POST">
           <div class="pull-left">
@@ -36,12 +40,12 @@
         </form> -->
 
         </div>
-<div class="container">        
+<div class="span5">        
 <div class ="form-reg" id="dog walkers start">
 <h2>Sign up and get loggin'!</h2>
 <a class="btn btn-large btn-success" href="{{ url_for ("user_reg") }}">Register</a>
 </div>
-
+</div>
 </div>
  
       <hr>

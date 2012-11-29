@@ -239,6 +239,30 @@ def update_user():
     model.session.commit()
     message="successfully updated"
     return render_template("/user_info", message=message)
+@app.route("/updated_owner", methods=["GET", "POST"])
+def update_owner():
+    tup=get_sidebar()
+    tup[3][0].first_name=request.form['first_name']
+    tup[3][0].last_name=request.form['last_name']
+    
+    tup[3][0].phone_number=request.form['phone_number']
+    tup[3][0].email=request.form['email']
+    tup[3][0].emergency_contact=request.form['emergency_contact']
+    tup[3][0].ontact_phone=request.form['contact_phone']
+    tup[3][0].vet_name=request.form['vet_name']
+    tup[3][0].vet_phone=request.form['vet_phone']
+    model.session.commit()
+
+    #Dog Table information
+   
+    tup[2][0].dog_name=request.form['dog_name']
+    tup[2][0].sex=request.form['sex']
+    tup[2][0].breed=request.form['breed']
+    tup[2][0].needs=request.form['needs']
+    model.session.commit()
+    message="successfully updated"
+    return render_template("/owner_info", message=message)
+
 
 @app.route("/owner_info")
 def owner_info():

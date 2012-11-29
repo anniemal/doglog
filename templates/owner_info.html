@@ -2,7 +2,10 @@
 {% block body %}
 
 <h2>Dogowner and Dog Profile</h2>
-<br>
+   <h2>Logger Profile</h2>
+     <div class="alert alert-success">
+        {{message}} 
+      </div>
 <h4>Edit as needed.</h4>
 <div class="form-signin">
 <form  action='{{url_for ("update_owner")}}' method="POST">

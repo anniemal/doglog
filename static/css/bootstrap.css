@@ -74,6 +74,16 @@ img {
   border: 0;
   -ms-interpolation-mode: bicubic;
 }
+
+#header_bar {
+
+  margin-top: 0px;
+  width:600px;
+  height:40px;
+  margin-left:100px;
+
+
+}
  .form-signin {
 
         max-width: 300px;
@@ -4238,7 +4248,7 @@ input[type="submit"].btn.btn-mini {
   min-height: 40px;
   padding-right: 20px;
   padding-left: 20px;
-  background-color: #fafafa;
+  background-color: #cccc99;
   background-image: -moz-linear-gradient(top, #ffffff, #f2f2f2);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f2f2f2));
   background-image: -webkit-linear-gradient(top, #ffffff, #f2f2f2);
@@ -4647,17 +4657,17 @@ input[type="submit"].btn.btn-mini {
   color: #999999;
 }
 
-.navbar-inverse .navbar-inner {
-  background-color: #1b1b1b;
-  background-image: -moz-linear-gradient(top, #222222, #111111);
+.navbar-inverse .navbar-inner {''
+  background-color: #cccc99; 
+  /*background-image: -moz-linear-gradient(top, #222222, #111111);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#222222), to(#111111));
   background-image: -webkit-linear-gradient(top, #222222, #111111);
   background-image: -o-linear-gradient(top, #222222, #111111);
   background-image: linear-gradient(to bottom, #222222, #111111);
-  background-repeat: repeat-x;
+  background-repeat: repeat-x;*/
   border-color: #252525;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff222222', endColorstr='#ff111111', GradientType=0);
-}
+/*  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff222222', endColorstr='#ff111111', GradientType=0);
+*/}
 
 .navbar-inverse .brand,
 .navbar-inverse .nav > li > a {
@@ -4699,11 +4709,13 @@ input[type="submit"].btn.btn-mini {
 .navbar-inverse .nav li.dropdown.open > .dropdown-toggle,
 .navbar-inverse .nav li.dropdown.active > .dropdown-toggle,
 .navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle {
+
   color: #ffffff;
   background-color: #111111;
 }
 
 .navbar-inverse .nav li.dropdown > .dropdown-toggle .caret {
+
   border-top-color: #999999;
   border-bottom-color: #999999;
 }
@@ -4711,11 +4723,13 @@ input[type="submit"].btn.btn-mini {
 .navbar-inverse .nav li.dropdown.open > .dropdown-toggle .caret,
 .navbar-inverse .nav li.dropdown.active > .dropdown-toggle .caret,
 .navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle .caret {
+  
   border-top-color: #ffffff;
   border-bottom-color: #ffffff;
 }
 
 .navbar-inverse .navbar-search .search-query {
+
   color: #ffffff;
   background-color: #515151;
   border-color: #111111;
@@ -4754,6 +4768,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .navbar-inverse .btn-navbar {
+  background-image: url(branchheader.png);
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #0e0e0e;

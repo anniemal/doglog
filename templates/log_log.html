@@ -1,20 +1,6 @@
 {% extends "loggedin_layout.html" %}
 {% block body %}
 
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span3">
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              {% for owner in owners %}
-                <li class="nav-header"> {{ owner.first_name }} {{ owner.last_name }}</li>
-                {% for value in dogs[owner.id] %}
-                <li class="active"><a href="{{ url_for ('dog_info', owner_id=owner.id, dog_id=value.id) }}"> {{value.dog_name}} </a></li>
-                {% endfor %}
-              {% endfor %}
-            </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
         <br>
         <h1 class="span4 offset2">Latest Log</h1>
         <div class="span6"> 
