@@ -3,31 +3,29 @@
 
 <!DOCTYPE html>
 
-<p>Welcome to Dog Log!</p>
+<h2>Welcome to Dog Log!</h2>
 <br>
-<p>Register yourself and your pup to get loggin'.</p>
-<br>
-<p>Tell us about yourself...</p>
-<br>
+<h2>Register the dogowner and your pup to get loggin'.</h2>
+
 <form class="form-horizontal" action='{{url_for ("save_user")}}'>
   <div class="control-group">
     <label class="control-label" for="input_First_Name">First Name</label>
     <div class="controls">
-      <input type="text" name="input_first_name" placeholder="First Name">
+      <input type="text" name="input_first_name" value="{{.first_name}}">
     </div>
   </div>
 
   <div class="control-group">
     <label class="control-label" for="input_last_name">Last Name</label>
     <div class="controls">
-      <input type="text" name="input_last_name" placeholder="Last Name">
+      <input type="text" name="input_last_name" value="{{user.last_name}}">
     </div>
     </div>
 
     <div class="control-group">
     <label class="control-label" for="input_phone">Phone Number</label>
     <div class="controls">
-      <input type="tel" name="input_phone" placeholder="(xxx)xxx-xxxx">
+      <input type="tel" name="input_phone" value="(xxx)xxx-xxxx">
     </div>
     </div>
 

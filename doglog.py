@@ -177,7 +177,7 @@ def dog_info(owner_id,dog_id):
 @app.route("/save_owner",methods=["GET","POST"])
 def save_owner():
     # DogOwner Table information
-   
+    
     first_name=request.form['first_name']
     last_name=request.form['last_name']
     
@@ -202,8 +202,9 @@ def save_owner():
     new_dog=model.Dog(owner_id=new_owner.id,dog_name=dog_name,sex=sex,breed=breed,needs=needs)
     model.session.add(new_dog)
     model.session.commit()
-
-    return redirect("/log")
+    tup=get_sidebar()
+    return redirect("/log",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
+            user_id=tup[4], user=tup[5])
 
 def get_sidebar():
     user_id=session['user_id']
@@ -216,15 +217,42 @@ def get_sidebar():
     dogs={}
     for owner in owners_id:
         dogs[owner]=model.session.query(model.Dog).filter_by(owner_id=owner).all()
-    tup=(user.first_name,owners_id,dogs,owners,user.id)
+    tup=(user.first_name,owners_id,dogs,owners,user.id,user)
     return tup
+
+@app.route("/user_info")
+def user_info():
+    tup=get_sidebar()
+
+    return render_template("user_info.html", first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
+            user_id=tup[4], user=tup[5])
+
+@app.route("/update_user", methods=["GET", "POST"])
+def update_user():
+    tup=get_sidebar()
+    tup[5].first_name=request.form['input_first_name']
+    tup[5].last_name=request.form['input_last_name']
+    tup[5].company_name=request.form['input_company_name']
+    tup[5].phone_number=request.form['input_phone']
+    tup[5].email=request.form['input_email']
+    tup[5].password=request.form['input_password']
+    model.session.commit()
+    message="successfully updated"
+    return render_template("/user_info", message=message)
+
+@app.route("/owner_info")
+def owner_info():
+    tup=get_sidebar()
+    return render_template("owner_info.html", first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
+            user_id=tup[4], user=tup[5])
+
 
 @app.route("/log")
 def log():
     tup=get_sidebar()
     walks=model.session.query(model.Walk).filter_by(dog_walker_id=tup[4]).all()
-    walk=model.session.query(model.Walk).filter_by(dog_walker_id=tup[4]).first()
-    if walk:
+    if walks:
+        walk=walks[-1]
         walk_as_dict = { 
             'walk_id': walk.id, \
             'dog_walker_id' : walk.dog_walker_id, \
@@ -239,10 +267,13 @@ def log():
             'walk_pic_url' : walk.walk_pic_url}
 
         json_walks=json.dumps(walk_as_dict)
+        date=str(walk.start_time)[0:10]
+        time=str(walk.start_time)[11:-3]
+        elapsed_time=str(walk.elapsed_time)[0:-3]
         return render_template("log_log.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
-            user_id=tup[4], json_walks=json_walks, elapsed_time=walk_as_dict['elapsed_time'], obedience_rating=walk_as_dict['obedience_rating'], \
+            user_id=tup[4], json_walks=json_walks, elapsed_time=elapsed_time, obedience_rating=walk_as_dict['obedience_rating'], \
             dog_mood=walk_as_dict['dog_mood'], elapsed_distance=walk_as_dict['elapsed_distance'], walk_pic_url=walk_as_dict['walk_pic_url'], walks=walks,\
-            start_time=walk_as_dict['start_time'])
+            start_time=time, date=date)
     else: 
         return render_template("get_app.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
             user_id=tup[4])
@@ -252,7 +283,7 @@ def past_log(walk_id):
 
     tup=get_sidebar()
     walks=model.session.query(model.Walk).filter_by(dog_walker_id=tup[4]).all()
-    walk=model.session.query(model.Walk).filter_by(id=walk_id).one()
+    walk=walks[-1]
     walk_as_dict = { 
         'walk_id': walk.id, \
         'dog_walker_id' : walk.dog_walker_id, \
@@ -265,12 +296,14 @@ def past_log(walk_id):
         'elapsed_time' : walk.elapsed_time, \
         'events' : walk.events, \
         'walk_pic_url' : walk.walk_pic_url}
-
+    date=str(walk.start_time)[0:10]
+    time=str(walk.start_time)[11:-3]
     json_walks=json.dumps(walk_as_dict)
+    elapsed_time=str(walk.elapsed_time)[0:-3]
     return render_template("log_log.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
-        user_id=tup[4], json_walks=json_walks, elapsed_time=walk_as_dict['elapsed_time'], obedience_rating=walk_as_dict['obedience_rating'], \
+        user_id=tup[4], json_walks=json_walks, elapsed_time=elapsed_time, obedience_rating=walk_as_dict['obedience_rating'], \
         dog_mood=walk_as_dict['dog_mood'], elapsed_distance=walk_as_dict['elapsed_distance'], walk_pic_url=walk_as_dict['walk_pic_url'], walks=walks,\
-        start_time=walk_as_dict['start_time'])
+        start_time=time, date=date)
 
 @app.route("/save_dogs")
 def save_dogs():

@@ -1,0 +1,63 @@
+{% extends "loggedin_layout.html" %}
+{% block body %}
+
+       <h2>Logger Profile</h2>
+      <h3> {{message}} </h3>
+<h4>This is your current profile. Please edit as needed.</h4>
+
+
+<form class="form-signin"  action="{{ url_for ("update_user") }}" method="POST">
+  <div class="control-group">
+    <label class="control-label" for="input_first_name">First Name</label>
+    <div class="controls">
+      <input type="text" name="input_first_name" value="{{user.first_name}}">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="input_last_name">Last Name</label>
+    <div class="controls">
+      <input type="text" name="input_last_name" value="{{user.last_name}}">
+    </div>
+    </div>
+
+<div class="control-group">
+    <label class="control-label" for="input_company_name">Company Name</label>
+    <div class="controls">
+      <input type="text" name="input_company_name" value="{{user.company_name}}">
+    </div>
+    </div>
+
+    <div class="control-group">
+    <label class="control-label" for="input_phone">Phone Number</label>
+    <div class="controls">
+      <input type="tel" name="input_phone" value="{{user.phone_number}}">
+    </div>
+    </div>
+
+      <div class="control-group">
+    <label class="control-label" for="input_email">E-mail Address</label>
+    <div class="controls">
+      <input type="text" name="input_email" value="{{user.email}}">
+    </div>
+    </div>
+
+     <div class="control-group">
+    <label class="control-label" for="input_password">Password</label>
+    <div class="controls">
+    <input type="password" name="input_password" value="{{user.password}}">
+    </div>
+    </div>
+
+<div >
+<button type="submit" class="btn btn-primary">Update Changes</button>
+</div>
+</form>
+    
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/js/jquery.js"></script>
+   
+{% endblock %}

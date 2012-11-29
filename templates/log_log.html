@@ -1,36 +1,6 @@
-{% extends "layout.html" %}
+{% extends "loggedin_layout.html" %}
 {% block body %}
-<head>
-    <script type="text/javascript" src="../static/js/jquery.js"></script>
-    <script type="text/javascript" src="../static/js/cordova-2.2.0.js"></script>
-    <script type='text/javascript'>
-    var json_walks = {{json_walks|safe}}; 
-    </script>
-    <script type="text/javascript" src="../static/js/log_detail.js"></script>
-    <script type="text/javascript"
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUSWiuAj-w8Cz7CV0JwpTmWVI9TnyaK6Y&sensor=false"> </script>
-</head>
-  <p>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#">dog log</a>
-          <div class="nav-collapse collapse">
-            <p class="navbar-text pull-right">
-              Loggin' as <a href="#" class="navbar-link">{{first_name}}</a>
-            </p>
-            <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
+
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span3">
@@ -45,32 +15,70 @@
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
-        <div class="span9">
-          <div class="hero-unit">
-            <h1>Latest Log</h1>
-            <div id="map_canvas">
-          </div>
-          </div>
-          <div>
-            <ul>
-            <li> Image: here </li>
-            <li> Distance: {{elapsed_distance}} </li>
-            <li> Start Time: {{start_time}} </li>
-            <li> Total Time: {{elapsed_time}} </li>
-            <li> Dog Mood: {{dog_mood}} </li>
-            <li> Obedience Rating: {{obedience_rating}} </li>
-          </ul>
-        </div>
+        <br>
+        <h1 class="span4 offset2">Latest Log</h1>
+        <div class="span6"> 
+        <div class="well well-large"> 
+            <div id="map_canvas"></div>
+       </div>
+     </div>
+      <div class="span3"> 
+      <div class="well well-large"> 
 
-        <div>  
+        <ul class="media-list">
+        <li class="media">
+        <a class="pull-left" href="#">
+      <img class="media-object" src="http://placehold.it/64x64">
+      </a>
+      <div class="media-body">
+      <h4 class="media-heading">{{dogs[owners[0].id][0].dog_name}}</h4>
+      </div>
+      </li>
+      </ul> 
+      
+      <table class="table table-striped">
+        <tbody>
+                <tr>
+                  <td>Distance:</td>
+                  <td>{{elapsed_distance}}</td>
+                </tr>
+                <tr>
+                  <td>Start Time:</td>
+                  <td>{{start_time}}</td>
+                </tr>
+                <tr>
+                  <td>Total Time:</td>
+                  <td>{{elapsed_time}}</td>
+                </tr>
+                <tr>
+                  <td>Dog Mood:</td>
+                  <td>{{dog_mood}}</td>
+                </tr>
+                <tr>
+                  <td>Obedience:</td>
+                  <td>{{obedience_rating}}</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  </div>
+  </div>
+        <div class="span5 offset3">  
+        <ul class="nav nav-pills nav-stacked">
           {% for walk in walks %}
-                <ul class="nav nav-list">
-                <li class="active"><a href="{{ url_for ('past_log', walk_id=walk.id) }}"> {{walk.start_time}} </a>
-                </li>
-                </ul>
+
+                  <li class="deactive"><a href="{{ url_for ('past_log', walk_id=walk.id) }}"> {{walk.start_time}} </a>
+
+               
+                 
+               
           {% endfor %}
+           </ul>
+           </div>
             </div>
           </div><!--/row-->
+                </div>
         </div><!--/span-->
       </div><!--/row-->
       <hr>
