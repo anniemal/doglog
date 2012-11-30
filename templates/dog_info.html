@@ -1,37 +1,111 @@
-{% extends "layout.html" %}
+{% extends "loggedin_layout.html" %}
 {% block body %}
 
+<form class="form-horizontal" action='{{url_for ("save_user")}}'>
+  <div class="control-group">
+    <label class="control-label" for="input_First_Name">First Name</label>
+    <div class="controls">
+      <input type="text" name="input_first_name" value="{{owners[0].first_name}}">
+    </div>
+  </div>
 
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span3">
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              {% for owner in owners %}
-                <li class="nav-header"> {{ owner.first_name }} {{ owner.last_name }}</li>
-                {% for value in dogs[owner.id] %}
-                {% if dog.id==value.id and dogowner.id==owner.id %}
-                <li class="active"><a href="{{ url_for ('dog_info', owner_id=owner.id, dog_id=value.id) }}"> {{value.dog_name}} </a></li>
-                {% else %}
-                <li class="deactive"><a href="{{ url_for ('dog_info', owner_id=owner.id, dog_id=value.id) }}"> {{value.dog_name}} </a></li>
-               {% endif %} 
-               {% endfor %}
-               {% endfor %}
-            </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
-        <div class="span9">
-          <div class="hero-unit">
-            <h1>log your Dog, {{dog.dog_name}} </h1>
+  <div class="control-group">
+    <label class="control-label" for="input_last_name">Last Name</label>
+    <div class="controls">
+      <input type="text" name="input_last_name" value="{{owners[0].last_name}}">
+    </div>
+    </div>
 
-          </div>
+    <div class="control-group">
+    <label class="control-label" for="input_phone">Phone Number</label>
+    <div class="controls">
+      <input type="tel" name="input_phone" value="(xxx)xxx-xxxx">
+    </div>
+    </div>
+
+      <div class="control-group">
+    <label class="control-label" for="input_email">E-mail Address</label>
+    <div class="controls">
+      <input type="text" name="input_email" placeholder="dogowners.email@address.com">
+    </div>
+    </div>
+
+     <div class="control-group">
+    <label class="control-label" for="input_password">Password</label>
+    <div class="controls">
+    <input type="password" name="input_password" placeholder="Password">
+    </div>
+    </div>
+
+     <div class="control-group">
+    <label class="control-label" for="input_emergency_contact">Emergency Contact</label>
+    <div class="controls">
+      <input type="text" name="input_emergency_contact" placeholder="Friend/Family Name">
+    </div>
+    </div>
+
+  
+  <div class="control-group">
+    <label class="control-label" for="input_contact_phone">Contact Phone Number</label>
+    <div class="controls">
+      <input type="text" name="input_contact_phone" placeholder="(xxx)xxx-xxxx">
+    </div>
+  </div>
+  <br>
+<p>Now introduce your pup to us...</p>
+<br>
+<div class="control-group">
+    <label class="control-label" for="input_dog_name">Dog Name</label>
+    <div class="controls">
+    <input type="text" id="input_dog_name" placeholder="Pup's Name">
+    </div>
+    </div>
+
+   <div class="control-group">
+    <label class="control-label" for="input_sex">Dog Sex</label>
+    <div class="controls">
+    <input type="text" id="input_sex" placeholder="He or She?">
+    </div>
+    </div>
+
+     <div class="control-group">
+    <label class="control-label" for="input_breed">Dog Breed</label>
+    <div class="controls">
+    <input type="text" id="input_breed" placeholder="What kind of dog is Molly/Xena?">
+    </div>
+    </div>
+
+ <div class="control-group">
+    <label class="control-label" for="input_vet_name">Veterinarian</label>
+    <div class="controls">
+      <input type="text" id="input_vet_name" placeholder="Vet's name/animal hospital">
+    </div>
+    </div>
+
+     <div class="control-group">
+    <label class="control-label" for="input_vet_phone">Vet Phone</label>
+    <div class="controls">
+      <input type="text" id="input_vet_phone" placeholder="Vet Phone (xxx)xxx-xxxx">
+    </div>
+    </div>
 
 
-    </div><!--/.fluid-container-->
+<div class="control-group">
+    <label class="control-label" for="input_needs">Dog Needs</label>
+    <div class="controls">
+    <textarea rows="5"><placeholder="Enter dog's feeding needs/water/medication requirements."></textarea>
+    </div>
+    </div>
+
+<div class="form-actions">
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="button" class="btn">Cancel</button>
+</div>
+</form>
+
+<!--/.fluid-container-->
 
     <!-- Le javascript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/static/js/jquery.js"></script>
-   
+     
 {% endblock %}

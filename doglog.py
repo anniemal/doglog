@@ -11,12 +11,10 @@ from datetime import datetime
 import string
 from flask.ext.sqlalchemy import SQLAlchemy
 
-
 SECRET_KEY = 'power_pose'
 
 app = Flask(__name__)
 app.config.from_object(__name__)
-
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 # db=SQLAlchemy(app)
@@ -58,8 +56,7 @@ def m_authenticate():
     email = request.form['email']
     password = request.form['password']
     print email
-    print password
-   
+    print password  
     results = model.session.query(model.DogWalker).filter(model.DogWalker.email==email).filter(model.DogWalker.password==password).all()
     if len(results) == 1:
         logged_in_user=results[0]
@@ -82,7 +79,6 @@ def dogowners_reg():
 
 @app.route("/save_user", methods=["GET","POST"])
 def save_user():
-
     first_name=request.form['input_first_name']
     last_name=request.form['input_last_name']
     company_name=request.form['input_company_name']
@@ -99,7 +95,6 @@ def save_user():
 
 @app.route("/m_save_user", methods=["GET","POST"])
 def m_save_user():
-
     first_name=request.form['first_name']
     last_name=request.form['last_name']
     company_name=request.form['company_name']
@@ -162,25 +157,22 @@ def m_save_map():
 
 @app.route("/add_owner",methods=["GET","POST"])
 def add_owner():
-
     return render_template("add_owner.html")
 
 @app.route("/dog_info/<int:owner_id>/<int:dog_id>",methods=["GET","POST"])
 def dog_info(owner_id,dog_id):
-
     tup=get_sidebar()
     dog=model.session.query(model.Dog).filter_by(id=dog_id).one()
-    dogowner=model.session.query(model.DogOwner).filter_by(id=owner_id).one()
-
-    return render_template("dog_info.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],dog=dog,dogowner=dogowner )
+    print dog
+    print dog.dog_name;
+    return render_template("owner_info.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],dog=dog)
 
 @app.route("/save_owner",methods=["GET","POST"])
 def save_owner():
     # DogOwner Table information
     
     first_name=request.form['first_name']
-    last_name=request.form['last_name']
-    
+    last_name=request.form['last_name']   
     phone_number=request.form['phone_number']
     email=request.form['email']
     emergency_contact=request.form['emergency_contact']
@@ -188,17 +180,14 @@ def save_owner():
     vet_name=request.form['vet_name']
     vet_phone=request.form['vet_phone']
     #Dog Table information
-   
     dog_name=request.form['dog_name']
     sex=request.form['sex']
     breed=request.form['breed']
-    needs=request.form['needs']
-  
+    needs=request.form['needs'] 
     new_owner=model.DogOwner(first_name=first_name,last_name=last_name,phone_number=phone_number,email=email, emergency_contact=emergency_contact,\
         contact_phone=contact_phone,vet_name=vet_name,vet_phone=vet_phone, dogwalker_id=session['user_id'])
     model.session.add(new_owner)
     model.session.commit()
-    
     new_dog=model.Dog(owner_id=new_owner.id,dog_name=dog_name,sex=sex,breed=breed,needs=needs)
     model.session.add(new_dog)
     model.session.commit()
@@ -223,7 +212,6 @@ def get_sidebar():
 @app.route("/user_info")
 def user_info():
     tup=get_sidebar()
-
     return render_template("user_info.html", first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
             user_id=tup[4], user=tup[5])
 
@@ -239,12 +227,12 @@ def update_user():
     model.session.commit()
     message="successfully updated"
     return render_template("/user_info", message=message)
+
 @app.route("/updated_owner", methods=["GET", "POST"])
 def update_owner():
     tup=get_sidebar()
     tup[3][0].first_name=request.form['first_name']
-    tup[3][0].last_name=request.form['last_name']
-    
+    tup[3][0].last_name=request.form['last_name']   
     tup[3][0].phone_number=request.form['phone_number']
     tup[3][0].email=request.form['email']
     tup[3][0].emergency_contact=request.form['emergency_contact']
@@ -252,9 +240,7 @@ def update_owner():
     tup[3][0].vet_name=request.form['vet_name']
     tup[3][0].vet_phone=request.form['vet_phone']
     model.session.commit()
-
     #Dog Table information
-   
     tup[2][0].dog_name=request.form['dog_name']
     tup[2][0].sex=request.form['sex']
     tup[2][0].breed=request.form['breed']
@@ -263,13 +249,11 @@ def update_owner():
     message="successfully updated"
     return render_template("/owner_info", message=message)
 
-
 @app.route("/owner_info")
 def owner_info():
     tup=get_sidebar()
     return render_template("owner_info.html", first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
             user_id=tup[4], user=tup[5])
-
 
 @app.route("/log")
 def log():
@@ -289,7 +273,6 @@ def log():
             'elapsed_time' : walk.elapsed_time, \
             'events' : walk.events, \
             'walk_pic_url' : walk.walk_pic_url}
-
         json_walks=json.dumps(walk_as_dict)
         date=str(walk.start_time)[0:10]
         time=str(walk.start_time)[11:-3]
@@ -304,7 +287,6 @@ def log():
 
 @app.route("/past_log/<int:walk_id>",methods=["GET","POST"])
 def past_log(walk_id):
-
     tup=get_sidebar()
     walks=model.session.query(model.Walk).filter_by(dog_walker_id=tup[4]).all()
     walk=walks[-1]

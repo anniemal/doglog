@@ -50,7 +50,6 @@
       <input type="text" name="contact_phone" value="{{owners[0].emergency_phone}}">
     </div>
   </div>
-  
 </div>
 
 <h4>Keep your pup info up-to-date.</h4>
@@ -59,35 +58,35 @@
 <div class="control-group">
     <label class="control-label" for="dog_name">Dog Name</label>
     <div class="controls">
-    <input type="text" name="dog_name" value="{{dogs[0].dog_name}}">
+    <input type="text" name="dog_name" value="{{dog.dog_name}}">
     </div>
     </div>
 
    <div class="control-group">
     <label class="control-label" for="sex">Dog Sex</label>
     <div class="controls">
-    <input type="text" name="sex" value="{{dogs[0].sex}}">
+    <input type="text" name="sex" value="{{dog.sex}}">
     </div>
     </div>
 
      <div class="control-group">
     <label class="control-label" for="breed">Dog Breed</label>
     <div class="controls">
-    <input type="text" name="breed" value="{{dogs[0].breed}}">
+    <input type="text" name="breed" value="{{dog.breed}}">
     </div>
     </div>
 
  <div class="control-group">
     <label class="control-label" for="vet_name">Veterinarian</label>
     <div class="controls">
-      <input type="text" name="vet_name" value="{{dogs[0].vet_name}}">
+      <input type="text" name="vet_name" value="{{dog.vet_name}}">
     </div>
     </div>
 
      <div class="control-group">
     <label class="control-label" for="vet_phone">Vet Phone</label>
     <div class="controls">
-      <input type="tel" name="vet_phone" value="{{dogs[0].vet_phone}}">
+      <input type="tel" name="vet_phone" value="{{dog.vet_phone}}">
     </div>
     </div>
 
@@ -95,7 +94,7 @@
 <div class="control-group">
     <label class="control-label" for="needs">Dog Needs</label>
     <div class="controls">
-    <textarea name ="needs" type="textarea" rows="5" value="{{dogs[0].needs}}">
+    <textarea name ="needs" type="textarea" rows="5" value="{{dog.needs}}">
     </textarea>
     </div>
     </div>

@@ -69,12 +69,12 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="/static/ico/apple-touch-icon-57-precomposed.png">
-    <script type="text/javascript" src="../static/js/jquery.js"></script>
-    <script type="text/javascript" src="../static/js/cordova-2.2.0.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/cordova-2.2.0.js"></script>
     <script type='text/javascript'>
     var json_walks = {{json_walks|safe}}; 
     </script>
-    <script type="text/javascript" src="../static/js/log_detail.js"></script>
+    <script type="text/javascript" src="/static/js/log_detail.js"></script>
     <script type="text/javascript"
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUSWiuAj-w8Cz7CV0JwpTmWVI9TnyaK6Y&sensor=false"> </script>
 </head>
@@ -92,7 +92,7 @@
           <a class="brand" href="#">dog log</a>
 
           <div class="nav-collapse collapse">
-                <img src="../static/img/branchheader.png" id= "header_bar">
+                <img src="/static/img/branchheader.png" id= "header_bar">
             <p class="navbar-text pull-right">
               Loggin' as <a href="{{url_for('user_info')}}" class="navbar-link">{{first_name}}</a>
             </p>
@@ -108,7 +108,7 @@
               {% for owner in owners %}
                 <li class="nav-header"> {{ owner.first_name }} {{ owner.last_name }}</li>
                 {% for value in dogs[owner.id] %}
-                <li class="active"><a href="{{ url_for ('dog_info', owner_id=owner.id, dog_id=value.id) }}"> {{value.dog_name}} </a></li>
+                <li class="active"><a href="{{ url_for('dog_info', owner_id=owner.id, dog_id=value.id) }}"> {{value.dog_name}} </a></li>
                 {% endfor %}
               {% endfor %}
             </ul>
@@ -138,5 +138,5 @@
         </div>
     </body>
       <footer>
-      <img src="../static/img/footerGrass.jpg"></footer>
+      <img src="/static/img/footerGrass.jpg"></footer>
 </html>

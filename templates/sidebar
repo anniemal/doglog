@@ -1,0 +1,19 @@
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              {% for owner in owners %}
+                <li class="nav-header"> {{ owner.first_name }} {{ owner.last_name }}</li>
+                {% for value in dogs[owner.id] %}
+                {% if dog.id==value.id and dogowner.id==owner.id %}
+                <li class="active"><a href="{{ url_for ('dog_info', owner_id=owner.id, dog_id=value.id) }}"> {{value.dog_name}} </a></li>
+                {% else %}
+                <li class="deactive"><a href="{{ url_for ('dog_info', owner_id=owner.id, dog_id=value.id) }}"> {{value.dog_name}} </a></li>
+               {% endif %} 
+               {% endfor %}
+               {% endfor %}
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
