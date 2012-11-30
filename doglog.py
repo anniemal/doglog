@@ -153,7 +153,7 @@ def m_save_map():
     print type(elapsed_distance.encode('utf-8'))
     print type(elapsed_time.encode('utf-8'))
     message_str="%s walked for %s miles for %s time." % (dog.dog_name.encode('utf-8'), elapsed_distance.encode('utf-8'), elapsed_time.encode('utf-8'))
-    dogowner_phone="+1%s" %(owner.phone_number.encode('utf-8'))
+    dogowner_phone="+1%s" %(owner.phone_number)
     message = client.sms.messages.create(to=dogowner_phone, from_="+14155994769", body=message_str) 
     return "success"
 
