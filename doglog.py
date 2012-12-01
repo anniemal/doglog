@@ -237,6 +237,7 @@ def update_owner():
     owners=tup[3]
     dogs=tup[2]
     dogs[owners[0].id][0].first_name=request.form['first_name']
+
     dogs[owners[0].id][0].last_name=request.form['last_name']   
     dogs[owners[0].id][0].phone_number=request.form['phone_number']
     dogs[owners[0].id][0].email=request.form['email']
@@ -250,6 +251,14 @@ def update_owner():
     dogs[owners[0].id][0].breed=request.form['breed']
     dogs[owners[0].id][0].needs=request.form['needs']
     model.session.commit()
+
+    print dogs[owners[0].id][0].first_name
+    print dogs[owners[0].id][0].last_name
+    print dogs[owners[0].id][0].phone_number
+    print dogs[owners[0].id][0].email
+    print dogs[owners[0].id][0].emergency_contact
+
+    print 
     message="successfully updated"
     return render_template("owner_info.html", message=message, first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
             user_id=tup[4], user=tup[5])
