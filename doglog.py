@@ -236,15 +236,14 @@ def update_owner():
     tup=get_sidebar()
     owners=tup[3]
     dogs=tup[2]
-    dogs[owners[0].id][0].first_name=request.form['first_name']
-
-    dogs[owners[0].id][0].last_name=request.form['last_name']   
-    dogs[owners[0].id][0].phone_number=request.form['phone_number']
-    dogs[owners[0].id][0].email=request.form['email']
-    dogs[owners[0].id][0].emergency_contact=request.form['emergency_contact']
-    dogs[owners[0].id][0].contact_phone=request.form['contact_phone']
-    dogs[owners[0].id][0].vet_name=request.form['vet_name']
-    dogs[owners[0].id][0].vet_phone=request.form['vet_phone']
+    owners[0].first_name=request.form['first_name']
+    owners[0].last_name=request.form['last_name']   
+    owners[0].phone_number=request.form['phone_number']
+    owners[0].email=request.form['email']
+    owners[0].emergency_contact=request.form['emergency_contact']
+    owners[0].contact_phone=request.form['contact_phone']
+    owners[0].vet_name=request.form['vet_name']
+    owners[0].vet_phone=request.form['vet_phone']
     #Dog Table information
     dogs[owners[0].id][0].dog_name=request.form['dog_name']
     dogs[owners[0].id][0].sex=request.form['sex']
@@ -252,11 +251,11 @@ def update_owner():
     dogs[owners[0].id][0].needs=request.form['needs']
     model.session.commit()
 
-    print dogs[owners[0].id][0].first_name
-    print dogs[owners[0].id][0].last_name
-    print dogs[owners[0].id][0].phone_number
-    print dogs[owners[0].id][0].email
-    print dogs[owners[0].id][0].emergency_contact
+    print owners[0].first_name
+    print owners[0].last_name
+    print owners[0].phone_number
+    print owners[0].email
+    print owners[0].emergency_contact
 
     print 
     message="successfully updated"
