@@ -30,7 +30,7 @@ class  DogOwner(Base):
 
     __tablename__ = "dogowners"
 
-    id = Column.00000000(BigInteger, primary_key=True)
+    id = Column(BigInteger, primary_key=True)
     first_name = Column(String(64), nullable=False)
     last_name = Column(String(64), nullable=False)
     phone_number=Column(BigInteger,nullable=False)
