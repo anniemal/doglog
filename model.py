@@ -17,6 +17,7 @@ Base.query = session.query_property()
 class DogWalker(Base):
 
     __tablename__ = "dogwalkers"
+    
     id = Column(BigInteger, primary_key=True)
     first_name = Column(String(64),nullable=False)
     last_name = Column(String(64),nullable=False)
@@ -29,7 +30,7 @@ class  DogOwner(Base):
 
     __tablename__ = "dogowners"
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column.00000000(BigInteger, primary_key=True)
     first_name = Column(String(64), nullable=False)
     last_name = Column(String(64), nullable=False)
     phone_number=Column(BigInteger,nullable=False)
@@ -49,7 +50,7 @@ class Dog(Base):
     id = Column(BigInteger, primary_key=True)
     owner_id = Column(BigInteger, ForeignKey('dogowners.id'))
     dog_name = Column(String(64), nullable=False)
-    sex=Column(Integer, nullable=False)
+    sex = Column(String(32), nullable=False)
     breed = Column(String(64), nullable=False)
     needs = Column(String(64), nullable=False)
 

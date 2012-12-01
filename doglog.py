@@ -244,7 +244,6 @@ def update_owner():
     dogs[owners[0].id][0].contact_phone=request.form['contact_phone']
     dogs[owners[0].id][0].vet_name=request.form['vet_name']
     dogs[owners[0].id][0].vet_phone=request.form['vet_phone']
-    model.session.commit()
     #Dog Table information
     dogs[owners[0].id][0].dog_name=request.form['dog_name']
     dogs[owners[0].id][0].sex=request.form['sex']
