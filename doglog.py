@@ -172,11 +172,11 @@ def m_save_map():
     dog_mood=json_obj['dog_mood']
     start_time=json_obj['start_time']
     print start_time
-    start_time = datetime.strptime(start_time[0:19],"%Y-%m-%dT%H:%M:%S")
+    start_time = datetime.strptime(start_time,"%Y-%m-%dT%H:%M:%S %Z")
     print start_time
     end_time=json_obj['end_time']
     print end_time
-    end_time =datetime.strptime(end_time[0:19],"%Y-%m-%dT%H:%M:%S")
+    end_time =datetime.strptime(end_time,"%Y-%m-%dT%H:%M:%S %Z")
     print end_time
     walk_location=json_obj['walk_location']
     walk_location=json.dumps(walk_location)
