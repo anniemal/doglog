@@ -116,20 +116,35 @@ def m_save_user():
 
 @app.route("/m_save_owner", methods=["GET","POST"])
 def m_save_owner():
+    print 'here'
+    print request.form
+    print request.form['first_name']
+    print  'here too'
     first_name=request.form['first_name']
+    print first_name
     last_name=request.form['last_name']
+    print last_name
     phone_number=request.form['phone_number']
+    print phone_number
     email=request.form['email']
-    emergency_contact=request.form['emergency_contact']
-    contact_phone=request.form['contact_phone']
-    vet_name=request.form['vet_name']
-    vet_phone=request.form['vet_phone']
     print email
+    emergency_contact=request.form['emergency_contact']
+    print emergency_contact
+    contact_phone=request.form['contact_phone']
+    print contact_phone
+    vet_name=request.form['vet_name']
+    print vet_name
+    vet_phone=request.form['vet_phone']
+    print vet_phone
     new_owner=model.DogOwner(first_name=first_name,last_name=last_name,phone_number=phone_number,email=email, emergency_contact=emergency_contact,\
         contact_phone=contact_phone,vet_name=vet_name,vet_phone=vet_phone, dogwalker_id=session['user_id'])
+    print new_owner.id
     model.session.add(new_owner)
     model.session.commit()
-    
+    new_owner_id=jsonify(owner_id=new_owner.id)
+    print new_owner_id
+    return new_owner_id
+
 @app.route("/m_save_map", methods=["GET", "POST"])
 def m_save_map():   
     string_json=request.form['json_vals']
