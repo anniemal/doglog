@@ -156,7 +156,7 @@ def m_save_dog():
     sex=request.form['sex']
     print sex
     new_dog=model.Dog(dog_name=dog_name,breed=breed,needs=needs,sex=sex)
-    model.session.add(new_dogs)
+    model.session.add(new_dog)
     model.session.commit()
     new_dog_id=jsonify(dog_id=new_dog.id)
     print new_dog_id
