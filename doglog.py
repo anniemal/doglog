@@ -137,7 +137,7 @@ def m_save_owner():
     vet_phone=request.form['vet_phone']
     print vet_phone
     new_owner=model.DogOwner(first_name=first_name,last_name=last_name,phone_number=phone_number,email=email, emergency_contact=emergency_contact,\
-        contact_phone=contact_phone,vet_name=vet_name,vet_phone=vet_phone, dogwalker_id=session['user_id'])
+        contact_phone=contact_phone,vet_name=vet_name,vet_phone=vet_phone,dogwalker_id=session['user_id'])
     print new_owner.id
     model.session.add(new_owner)
     model.session.commit()
@@ -172,11 +172,11 @@ def m_save_map():
     dog_mood=json_obj['dog_mood']
     start_time=json_obj['start_time']
     print start_time
-    start_time = datetime.strptime(start_time,"%Y-%m-%dT%H:%M:%S %Z")
+    start_time = datetime.strptime(start_time[0:24],"%b %d %Y %H:%M:%S")
     print start_time
     end_time=json_obj['end_time']
     print end_time
-    end_time =datetime.strptime(end_time,"%Y-%m-%dT%H:%M:%S %Z")
+    end_time =datetime.strptime(end_time[0:24],"%b %d %Y %H:%M:%S")
     print end_time
     walk_location=json_obj['walk_location']
     walk_location=json.dumps(walk_location)
