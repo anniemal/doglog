@@ -145,6 +145,24 @@ def m_save_owner():
     print new_owner_id
     return new_owner_id
 
+@app.route("/m_save_dog", methods=["GET","POST"])
+def m_save_dog():
+    dog_name=request.form['dog_name']
+    print dog_name
+    breed=request.form['breed']
+    print breed
+    needs=request.form['needs']
+    print needs
+    sex=request.form['sex']
+    print sex
+    new_dog=model.Dog(dog_name=dog_name,breed=breed,needs=needs,sex=sex)
+    model.session.add(new_dogs)
+    model.session.commit()
+    new_dog_id=jsonify(dog_id=new_dog.id)
+    print new_dog_id
+    print new_dog.id
+    return new_dog_id
+
 @app.route("/m_save_map", methods=["GET", "POST"])
 def m_save_map():   
     string_json=request.form['json_vals']
