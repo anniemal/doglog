@@ -1,0 +1,449 @@
+/*-----------------------------------------------------------------------------------*/
+/*	Main CSS Styles
+/*-----------------------------------------------------------------------------------*/
+
+body{
+	margin:0px;
+	padding:0px;
+	background:#fff;
+	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size:12px;
+	color:#2f2f2f;
+}
+
+h1, h2, h3, h4, h5, h6, li, ul, ol, p{
+	padding:0px;
+	margin:0px;
+}
+
+ul li{
+	list-style:none;
+}
+
+a{
+	outline:none;
+	color:#88BBC8;
+	text-decoration:none;
+}
+
+a:hover{
+	color:#F26535;
+}
+
+.container{
+	width:960px;
+	margin:0px auto;
+}
+
+.container.rel{
+	position:relative;
+}
+
+.clear{
+	clear:both;
+}
+
+.right{
+	text-align:right;
+}
+
+.hidden{
+	display:none;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Header Area
+/*-----------------------------------------------------------------------------------*/
+
+#header{
+	min-height:350px;
+	background:url(../img/bg.png) repeat #262626;
+	padding: 0 0 30px 0;
+	color:#ffffff;
+}
+
+#iphone{
+	position:absolute;
+	top:50px;
+	width: 266px;
+	height: 538px;
+	background: url(../img/iphone.png) no-repeat;
+}
+
+#homebutton{
+    display: block;
+    height: 50px;
+    left: 110px;
+    position: absolute;
+    text-decoration: none;
+    text-indent: -9999px;
+    top: 447px;
+    width: 50px;
+}
+
+#slides, #slides li{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#slides{
+	position: absolute;
+	top: 83px;
+	left: 22px;
+	width:225px;
+	height:338px;
+}
+
+#slides li{
+	display: none;
+	cursor:pointer;
+}
+
+#header .float{
+	float:left;
+}
+
+#logo{
+	margin:52px 0 0 30px;
+	width:315px;
+}
+
+#logo p{
+	line-height:24px;
+	font-size:14px;
+	margin:17px 0 20px 0;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Preview Thumbs
+/*-----------------------------------------------------------------------------------*/
+
+#previews{
+	margin:60px 0 0 315px;
+	width:300px;
+}
+
+#previews p{
+	cursor:pointer;
+	margin:15px 0 0 0;
+}
+
+#previews ul li{
+	margin:20px 20px 0 0;
+	float:left;
+}
+
+#previews ul li a{
+	display:block;
+}
+
+#previews ul li a img{
+	-webkit-box-shadow: inset 1px 1px 5px 1px #000000;
+	-moz-box-shadow: inset 1px 1px 5px 1px #000000;
+	box-shadow: inset 1px 1px 5px 1px #000000;
+	padding:8px;
+	background:#2f2f2f;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+#previews ul li.activeSlide a img{
+-webkit-box-shadow: 1px 1px 5px 0px #000000;
+-moz-box-shadow: 1px 1px 5px 0px #000000;
+box-shadow: 1px 1px 5px 0px #000000;
+background:#3F3F3F;
+}
+
+#previews ul li.third{
+	margin-right:0px!important;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Subscribe Area
+/*-----------------------------------------------------------------------------------*/
+
+#subscribe{
+	display:none;
+	margin:40px 0 20px 310px;
+	border-top:1px solid #2f2f2f;
+	border-bottom:1px solid #2f2f2f;
+	padding:20px 10px;
+}
+
+#subscribe p{
+	font-size:22px;
+	text-transform:capitalize;
+	text-shadow: 1px 1px 1px #000000;
+	filter: dropshadow(color=#000000, offx=1, offy=1);
+}
+
+#subscribe small{
+	text-transform:uppercase;
+}
+
+#subscribe #cancel{
+	float:right;
+	display:block;
+}
+
+#form-subscribe{
+	background: url("../img/subscribe_bg.png") no-repeat scroll 0 0 transparent;
+	width:304px;
+	height:39px;
+	margin:20px 0 0 0;
+}
+
+#form-subscribe #email{
+    background:none repeat scroll 0 0 transparent;
+    border:none;
+    font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 12px;
+	height:39px;
+	line-height:39px;
+    padding:0 0 0 10px;
+    width: 205px;
+	color:#fff;
+}
+
+#form-subscribe #email-submit{
+    background:none repeat scroll 0 0 transparent;
+    border:none;
+    cursor:pointer;
+    display:block;
+    float:right;
+    font-size:0;
+    height:35px;
+    line-height:0;
+    text-indent:-9999px;
+    width:82px;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Main Content Classes
+/*-----------------------------------------------------------------------------------*/
+
+#content{
+	background:url(../img/gradient.png) top center repeat-x;
+	min-height:500px;
+}
+
+#main-content{
+	margin:0 0 0 310px;
+	width:650px;
+	padding:30px 0 90px 0;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Tabs And Panels
+/*-----------------------------------------------------------------------------------*/
+
+#tabs{
+	background:url(../img/nav-ribbon.png) top center;
+	height:71px;
+	width:650px;
+}
+
+#tabs ul{
+	padding:12px 0 0 70px;
+}
+
+#tabs ul li{
+	color:#2f2f2f;
+	float:left;
+	margin:0 20px 0 0;
+	cursor:pointer;
+	font-size:13px;
+	padding:6px 10px 5px 10px;
+}
+
+#tabs ul li.current{
+	color:#777D7F;
+	background:url(../img/active_tab.png) top repeat-x #dfdfdf;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 1px 1px 1px 0px #c2c2c2;
+	-moz-box-shadow: inset 1px 1px 1px 0px #c2c2c2;
+	box-shadow: inset 1px 1px 1px 0px #c2c2c2;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Feature Lists
+/*-----------------------------------------------------------------------------------*/
+
+.features{
+	padding:0 0 0 15px;
+}
+
+.features li{
+	float:left;
+	width:170px;
+	margin:60px 59px 0 0;
+}
+
+.features li:last-child{
+	margin-right:0px!important;
+}
+
+.features li img{
+	-webkit-box-shadow: 0px 0px 10px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    0px 0px 10px rgba(50, 50, 50, 0.75);
+	box-shadow:         0px 0px 10px rgba(50, 50, 50, 0.75);
+}
+
+.features li h3{
+	margin:15px 0px;
+	font-size:18px;
+	font-weight:normal;
+	line-height:22px;
+}
+
+.features li p{
+	line-height:22px;
+	font-size:13px;
+	color:#535C5F;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Review Classes
+/*-----------------------------------------------------------------------------------*/
+
+.review{
+	margin:40px 0 0 0;
+	padding:15px 25px;
+	color:#777D7F;
+	background:url(../img/review_bg.png) top repeat-x #dfdfdf;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 2px 2px 2px 0px #c2c2c2;
+	-moz-box-shadow: inset 2px 2px 2px 0px #c2c2c2;
+	box-shadow: inset 2px 2px 2px 0px #c2c2c2;
+	cursor:default;
+	border:1px solid #ffffff;
+}
+
+.review p{
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-style:italic;
+	font-size:18px;
+	line-height:26px;
+	color:#2f2f2f;
+}
+
+.review span{
+	display:block;
+	text-align:right;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Video Panel Classes
+/*-----------------------------------------------------------------------------------*/
+
+#video-panel{
+	padding:30px 0 0 10px;
+}
+
+#video-panel h1{
+	margin:15px 0px 5px 0;
+	font-size:xx-large;
+	font-weight:normal;
+}
+
+#video-panel small{
+	text-transform:uppercase;
+}
+
+.video{
+	margin:20px 0px 0 0;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Content Grid
+/*-----------------------------------------------------------------------------------*/
+
+.grid.onehalf{
+	width:47.5%;
+}
+
+.grid.onethird{
+	width:30%;
+}
+
+.grid.onefourth{
+	width:21%;
+}
+
+.grid.onehalf,
+.grid.onethird,
+.grid.onefourth{
+	margin-right: 5%;
+	float: left;
+	display: block;
+	text-align:left!important;
+	margin-top:30px;
+}
+
+.grid.noMargin{
+	margin-right:0!important;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Footer / Sidebar Classes
+/*-----------------------------------------------------------------------------------*/
+
+#footer{
+	margin:550px 0 0 0;
+	padding:15px 5px;
+	border-top:1px dashed #CFCFCF;
+	color:#6F6F6F;
+}
+
+#footer p{
+	line-height:24px;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Social Icons
+/*-----------------------------------------------------------------------------------*/
+
+.social{
+	padding:0 0 0 22px;
+	line-height:16px;
+	min-height:16px;
+}
+
+.social.blinklist{background:url(../img/social-icons/blinklist.png) left center no-repeat;}
+.social.brightkite{background:url(../img/social-icons/brightkite.png) left center no-repeat;}
+.social.delicious{background:url(../img/social-icons/delicious.png) left center no-repeat;}
+.social.design_float{background:url(../img/social-icons/design_float.png) left center no-repeat;}
+.social.digg{background:url(../img/social-icons/digg.png) left center no-repeat;}
+.social.dopplr{background:url(../img/social-icons/dopplr.png) left center no-repeat;}
+.social.email{background:url(../img/social-icons/email.png) left center no-repeat;}
+.social.facebook{background:url(../img/social-icons/facebook.png) left center no-repeat;}
+.social.feed{background:url(../img/social-icons/feed.png) left center no-repeat;}
+.social.flickr{background:url(../img/social-icons/flickr.png) left center no-repeat;}
+.social.friendfeed{background:url(../img/social-icons/friendfeed.png) left center no-repeat;}
+.social.furl{background:url(../img/social-icons/furl.png) left center no-repeat;}
+.social.gamespot{background:url(../img/social-icons/gamespot.png) left center no-repeat;}
+.social.googleplus{background:url(../img/social-icons/googleplus.png) left center no-repeat;}
+.social.lastfm{background:url(../img/social-icons/lastfm.png) left center no-repeat;}
+.social.linkedin{background:url(../img/social-icons/linkedin.png) left center no-repeat;}
+.social.magnolia{background:url(../img/social-icons/magnolia.png) left center no-repeat;}
+.social.mixx{background:url(../img/social-icons/mixx.png) left center no-repeat;}
+.social.myspace{background:url(../img/social-icons/myspace.png) left center no-repeat;}
+.social.newsvine{background:url(../img/social-icons/newsvine.png) left center no-repeat;}
+.social.posterous{background:url(../img/social-icons/posterous.png) left center no-repeat;}
+.social.reddit{background:url(../img/social-icons/reddit.png) left center no-repeat;}
+.social.sphere{background:url(../img/social-icons/sphere.png) left center no-repeat;}
+.social.sphinn{background:url(../img/social-icons/sphinn.png) left center no-repeat;}
+.social.stumble{background:url(../img/social-icons/stumble.png) left center no-repeat;}
+.social.technorati{background:url(../img/social-icons/technorati.png) left center no-repeat;}
+.social.tripadvisor{background:url(../img/social-icons/tripadvisor.png) left center no-repeat;}
+.social.tumblr{background:url(../img/social-icons/tumblr.png) left center no-repeat;}
+.social.twitter{background:url(../img/social-icons/twitter.png) left center no-repeat;}
+.social.vimeo{background:url(../img/social-icons/vimeo.png) left center no-repeat;}
+.social.youtube{background:url(../img/social-icons/youtube.png) left center no-repeat;}

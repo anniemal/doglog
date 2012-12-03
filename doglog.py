@@ -194,7 +194,7 @@ def save_owner():
     model.session.add(new_dog)
     model.session.commit()
     tup=get_sidebar()
-    return redirect("/log",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
+    return render_template("log_log.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
             user_id=tup[4], user=tup[5])
 
 def get_sidebar():
