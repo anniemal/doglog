@@ -110,8 +110,26 @@ def m_save_user():
     model.session.commit()
     new_user_id=jsonify(user_id=new_user.id)
     session['user_id']=new_user.id
+    print new_user_id
+    print new_user.id
     return new_user_id
 
+@app.route("/m_save_owner", methods=["GET","POST"])
+def m_save_owner():
+    first_name=request.form['first_name']
+    last_name=request.form['last_name']
+    phone_number=request.form['phone_number']
+    email=request.form['email']
+    emergency_contact=request.form['emergency_contact']
+    contact_phone=request.form['contact_phone']
+    vet_name=request.form['vet_name']
+    vet_phone=request.form['vet_phone']
+    print email
+    new_owner=model.DogOwner(first_name=first_name,last_name=last_name,phone_number=phone_number,email=email, emergency_contact=emergency_contact,\
+        contact_phone=contact_phone,vet_name=vet_name,vet_phone=vet_phone, dogwalker_id=session['user_id'])
+    model.session.add(new_owner)
+    model.session.commit()
+    
 @app.route("/m_save_map", methods=["GET", "POST"])
 def m_save_map():   
     string_json=request.form['json_vals']

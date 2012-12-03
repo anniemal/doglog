@@ -78,7 +78,7 @@ img {
 #header_bar {
 
   margin-top: 0px;
-  width:600px;
+  width:500px;
   height:40px;
   margin-left:100px;
 }
@@ -87,6 +87,7 @@ img {
   overflow:auto;
   height:400px;
 }
+
  .form-signin {
 
         max-width: 300px;
@@ -4771,7 +4772,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .navbar-inverse .btn-navbar {
-  background-image: url(branchheader.png);
+ 
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #0e0e0e;
