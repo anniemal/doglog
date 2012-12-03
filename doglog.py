@@ -168,28 +168,23 @@ def m_save_map():
     string_json=request.form['json_vals']
     json_obj=json.loads(string_json)
     dog_walker_id=json_obj['dogwalker_id']
-    print dog_walker_id
     obedience_rating=json_obj['obedience_rating']
-    print obedience_rating
     dog_mood=json_obj['dog_mood']
-    print dog_mood
     start_time=json_obj['start_time']
+    print start_time
     start_time = datetime.strptime(start_time[0:19],"%Y-%m-%dT%H:%M:%S")
     print start_time
     end_time=json_obj['end_time']
     print end_time
     end_time =datetime.strptime(end_time[0:19],"%Y-%m-%dT%H:%M:%S")
+    print end_time
     walk_location=json_obj['walk_location']
     walk_location=json.dumps(walk_location)
     elapsed_distance = json_obj['elapsed_distance']
-    print elapsed_distance 
     elapsed_time = json_obj['elapsed_time']
     event_data=json_obj['events']
     event_data=json.dumps(event_data)
     walk_pic_url=json_obj['walk_pic_url']
-    print event_data
-    print elapsed_time
-    print walk_location
     walk_pic_url='kjsdf'
     new_walk=model.Walk(dog_walker_id=dog_walker_id,obedience_rating=obedience_rating,dog_mood=dog_mood,start_time=start_time, \
         end_time=end_time,walk_location=walk_location,elapsed_distance=elapsed_distance,elapsed_time=elapsed_time, events=event_data, walk_pic_url=walk_pic_url)
@@ -200,9 +195,6 @@ def m_save_map():
     account = "AC7225c1d30d2cce103ea56289e3fc6ed8"
     token = "6efbc4e502a9672e69fddf93c981cbbe"
     client = TwilioRestClient(account, token)
-    print type(dog.dog_name.encode('utf-8'))
-    print type(elapsed_distance.encode('utf-8'))
-    print type(elapsed_time.encode('utf-8'))
     message_str="%s walked for %s miles for %s time." % (dog.dog_name.encode('utf-8'), elapsed_distance.encode('utf-8'), elapsed_time.encode('utf-8'))
     dogowner_phone="+1%s" %(owner.phone_number)
     message = client.sms.messages.create(to=dogowner_phone, from_="+14155994769", body=message_str) 
