@@ -1,15 +1,16 @@
 {% extends "loggedin_layout.html" %}
 {% block body %}
+<div>
+  <h1 class="offset4"> Walk Log</h1>
+</div>
 
-        <h1 class="offset4"> Walk Log</h1>
-        <div class="row">
-        <div class="span3"> 
-        <div  id="scrolling"> 
-        <div class="well well-large"> 
+<div class="row">
+  <div class="span3"> 
+    <div  id="scrolling"> 
+      <div class="well well-large"> 
         <ul class="nav nav-pills nav-stacked">
-                <h4><li class="table table-striped">Logs by Date and Time</li></h4>
+          <h4><li class="table table-striped">Logs by Date and Time</li></h4>
           {% for item in range(walks|length)%}
-
             {% if walks[item].id==compare_id %}
                   <li class="active"><a href="{{ url_for ('past_log', walk_id=walks[item].id) }}"> {{new_time_list[item]}} </a> </li>
                   <img src="/static/img/branchsmall.png">
@@ -18,55 +19,48 @@
                   <img src="/static/img/branchsmall.png">
             {% endif %} 
           {% endfor %}
-           </ul>
-        </div>
+        </ul>
       </div>
-      </div>
-        <div class="span6"> 
-        <div class="well well-large"> 
-            <div id="map_canvas"></div>
-       </div>
-     </div>
-      <div class="span3"> 
-      <div class="well well-large"> 
-        <ul class="media-list">
+    </div>
+  </div>
+  <div class="span6"> 
+    <div class="well well-large"> 
+      <div id="map_canvas"></div>
+    </div>
+  </div>
+  <div class="span3"> 
+    <div class="well well-large"> 
+      <ul class="media-list">
         <li class="media">
-        <a class="pull-left" href="#">
-      <img class="media-object" src="/static/img/64x64_Molly_head.jpg">
-      </a>
-      <div class="media-body">
-      <h4 class="media-heading"><a href="{{ url_for ('dog_info', owner_id=owners[0].id, dog_id=dogs[owners[0].id][0].id)}}">{{dogs[owners[0].id][0].dog_name}} </a> </h4>
-      </div>
-      </li>
+          <a class="pull-left" href="#">
+            <img class="media-object" src="/static/img/64x64_Molly_head.jpg">
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading"><a href="{{ url_for ('dog_info', owner_id=owners[0].id, dog_id=dogs[owners[0].id][0].id)}}">{{dogs[owners[0].id][0].dog_name}} </a> </h4>
+          </div>
+        </li>
       </ul> 
-      
       <table class="table table-striped">
         <tbody>
-                <tr>
-                  <td>Distance:</td>
-                  <td>{{elapsed_distance}}</td>
-                </tr>
-                <tr>
-                  <td>Start Time:</td>
-                  <td>{{start_time}}</td>
-                </tr>
-                <tr>
-                  <td>Total Time:</td>
-                  <td>{{elapsed_time}}</td>
-                </tr>
+          <tr>
+            <td>Distance:</td>
+            <td>{{elapsed_distance}}</td>
+          </tr>
+          
+          <tr>
+            <td>Start Time:</td>
+            <td>{{start_time}}</td>
+          </tr>
+          
+          <tr>
+            <td>Total Time:</td>
+            <td>{{elapsed_time}}</td>
+          </tr>
+
         </tbody>
       </table>
     </div>
   </div>
-  
-     
-  </div>
-       
-        
-      
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/static/js/jquery.js"></script>
-   
+</div>
+    
 {% endblock %}

@@ -69,50 +69,49 @@
     <script type="text/javascript" src="/static/js/jquery.js"></script>
     <script type="text/javascript" src="/static/js/cordova-2.2.0.js"></script>
     <script type='text/javascript'>
-    var json_walks = {{json_walks|safe}}; 
+      var json_walks = {{json_walks|safe}}; 
     </script>
     <script type="text/javascript" src="/static/js/log_detail.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUSWiuAj-w8Cz7CV0JwpTmWVI9TnyaK6Y&sensor=false"> 
     </script>
-</head>
+  </head>
 
-<div class="navbar navbar-inverse navbar-fixed-top"> 
-  <div class="navbar-inner">      
-    <div class="container-fluid">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      </a>
-      <a class="brand" href="{{url_for('log')}}">dog log</a>
-      <div class="nav-collapse collapse">
-        <img src="/static/img/branchheader.png" id= "header_bar">
+  <div class="navbar navbar-inverse navbar-fixed-top"> 
+    <div class="navbar-inner">      
+      <div class="container-fluid">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="{{url_for('log')}}">dog log</a>
+        <div class="nav-collapse collapse">
+          <img src="/static/img/branchheader.png" id= "header_bar">
           <p class="navbar-text pull-right"> 
             Loggin' as <a href="{{url_for('user_info')}}" class="navbar-link">{{first_name}}</a>
           </p>
-      </div><!--/.nav-collapse -->
+        </div><!--/.nav-collapse -->
+      </div>
     </div>
   </div>
-</div>
 
-<body>
-  <div class="container">
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul class=flashes>
-          {% for message in messages %}
-            {{ message }}
-          {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
+  <body>
+    <div class="container">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class=flashes>
+            {% for message in messages %}
+              {{ message }}
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
 
-    {% block body %}
-    {% endblock %}
-
+      {% block body %}
+      {% endblock %}
+    </div>
+  </body>
+  <div style="position:relative;">
+    <img style="position:absolute;margin-left:auto;margin-right:auto" src="/static/img/footerGrass.jpg">
   </div>
-</body>
-<div style="position:relative;">
-  <img style="position:absolute;margin-left:auto;margin-right:auto" src="/static/img/footerGrass.jpg">
-</div>
 </html>

@@ -2,26 +2,33 @@
 {% block body %}
 
 <!DOCTYPE html>
-  <body>
-    <div class="container-narrow">
-      <div class="jumbotron">
-       <img src="../static/img/doglog-logo.png">
-        <h2>log your dog walks, logs and more.</h2>
-      </div>
-        <div class="container" id="login">
-            <p>{{error}}</p>
-        <div class="row">
+
+<body>
+  <div class="container-narrow">
+    <div class="jumbotron">
+      <img src="../static/img/doglog-logo.png">
+      <h2>log your dog walks, logs and more.</h2>
+    </div>
+    <div class="container" id="login">
+      <p>{{error}}</p>
+      <div class="row">
         <div class="span5">
-        <form class="form-signin" action="{{ url_for ("authenticate") }}" method="POST">
-        <h2 class="form-signin-heading">Sign In</h2>
-        <input type="text" class="input-block-level" name="email" placeholder="Email address">
-        <input type="password" class="input-block-level" name="password" placeholder="Password">
-        <label class="checkbox">
-        <input type="checkbox" value="remember-me"> Remember Me?
-        </label>       
-        <button class="btn btn-large btn-primary" id="button_login" type="submit">Sign in</button>     
-   <!--    </form>
-        <form class ="form-horizontal" action="{{ url_for ("authenticate") }}" method="POST">
+          <form class="form-signin" action="{{ url_for ("authenticate") }}" method="POST">
+            <h2 class="form-signin-heading">Sign In</h2>
+            <input type="text" class="input-block-level" name="email" placeholder="Email address">
+            <input type="password" class="input-block-level" name="password" placeholder="Password">
+            <label class="checkbox">
+              <input type="checkbox" value="remember-me"> Remember Me?
+            </label>       
+            <button class="btn btn-large btn-primary" id="button_login" type="submit">Sign in</button>     
+          </form>
+        </div>
+      </div>
+    
+
+
+
+       <!--  <form class ="form-horizontal" action="{{ url_for ("authenticate") }}" method="POST">
           <div class="pull-left">
             Email Address: <input type="text" name="email" placeholder="Enter e-mail address">
           </div>
@@ -30,23 +37,18 @@
           </div>  
           <div class="pull-left">
             <button class="btn btn-primary" id="button_login" type="submit"> Log In </button>
-          </div>
-        </form> -->
-        </div>
-<div class="span5">        
-<div class ="form-reg" id="dog walkers start">
-<h2>Sign up and get loggin'!</h2>
-<a class="btn btn-large btn-success" href="{{ url_for ("user_reg") }}">Register</a>
-</div>
-</div>
-</div>
-    </div> <!-- /container -->
+            </div>
+          </form> -->
+      <!--   </div> --> -->
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="/static/js/bootstrap.js"></script>
-  </body>
-</html>
+      <div class="span5">        
+        <div class ="form-reg" id="dog walkers start">
+          <h2>Sign up and get loggin'!</h2>
+          <a class="btn btn-large btn-success" href="{{ url_for ("user_reg") }}">Register</a>
+        </div>
+      </div>
+    </div>
+  </div> 
+</body>
+
 {% endblock %}

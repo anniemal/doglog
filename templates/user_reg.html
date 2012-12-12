@@ -7,44 +7,50 @@
 <h4>Tell us about yourself...</h4>
 
 <form class="form-signin"  action="{{ url_for ("save_user") }}" method="POST">
-  <div class="control-group">
-    <label class="control-label" for="input_first_name">First Name</label>
-    <div class="controls">
-    <input type="text" name="input_first_name" placeholder="First Name">
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label" for="input_last_name">Last Name</label>
-    <div class="controls">
-    <input type="text" name="input_last_name" placeholder="Last Name">
-    </div>
-    </div>
-<div class="control-group">
-    <label class="control-label" for="input_company_name">Company Name</label>
-    <div class="controls">
-    <input type="text" name="input_company_name" placeholder="Company Name">
-    </div>
-    </div>
     <div class="control-group">
-    <label class="control-label" for="input_phone">Phone Number</label>
-    <div class="controls">
-    <input type="tel" name="input_phone" placeholder="(xxx)xxx-xxxx">
+        <label class="control-label" for="input_first_name">First Name</label>
+        <div class="controls">
+            <input type="text" name="input_first_name" placeholder="First Name">
+        </div>
     </div>
-    </div>
+  
     <div class="control-group">
-    <label class="control-label" for="input_email">E-mail Address</label>
-    <div class="controls">
-    <input type="text" name="input_email" placeholder="dogwalkers.email@address.com">
+        <label class="control-label" for="input_last_name">Last Name</label>
+        <div class="controls">
+            <input type="text" name="input_last_name" placeholder="Last Name">
+        </div>
     </div>
+
+    <div class="control-group">
+        <label class="control-label" for="input_company_name">Company Name</label>
+        <div class="controls">
+            <input type="text" name="input_company_name" placeholder="Company Name">
+        </div>
     </div>
-     <div class="control-group">
-    <label class="control-label" for="input_password">Password</label>
-    <div class="controls">
-    <input type="password" name="input_password" placeholder="Password">
+
+    <div class="control-group">
+        <label class="control-label" for="input_phone">Phone Number</label>
+        <div class="controls">
+            <input type="tel" name="input_phone" placeholder="(xxx)xxx-xxxx">
+        </div>
     </div>
+
+    <div class="control-group">
+        <label class="control-label" for="input_email">E-mail Address</label>
+        <div class="controls">
+            <input type="text" name="input_email" placeholder="dogwalkers.email@address.com">
+        </div>
     </div>
-<div >
-<button type="submit" class="btn btn-primary">Submit</button>
-</div>
+    
+    <div class="control-group">
+        <label class="control-label" for="input_password">Password</label>
+        <div class="controls">
+            <input type="password" name="input_password" placeholder="Password">
+        </div>
+    </div>
+    
+    <div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
 </form>
 {% endblock %}

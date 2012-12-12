@@ -4,103 +4,101 @@
 <h2>Dogowner and Dog Profile</h2>
 <br>
 <h4>Edit as needed.</h4>
-<div class="form-signin">
-<form  action='{{url_for ("save_owner")}}' method="POST">
-  <div class="control-group">
-    <label class="control-label" for="first_name">First Name</label>
-    <div class="controls">
-      <input type="text" name="first_name" value="{{dogowner.first_name}}">
-    </div>
-  </div>
 
-  <div class="control-group">
-    <label class="control-label" for="last_name">Last Name</label>
-    <div class="controls">
-      <input type="text" name="last_name" value="{{dogowner.last_name}}">
-    </div>
+<div class="form-signin">
+  <form  action='{{url_for ("save_owner")}}' method="POST">
+    <div class="control-group">
+      <label class="control-label" for="first_name">First Name</label>
+      <div class="controls">
+        <input type="text" name="first_name" value="{{dogowner.first_name}}">
+      </div>
     </div>
 
     <div class="control-group">
-    <label class="control-label" for="phone_number">Phone Number</label>
-    <div class="controls">
-      <input type="tel" name="phone_number" value="{{dogowner.phone_number}}">
-    </div>
-    </div>
-
-      <div class="control-group">
-    <label class="control-label" for="email">E-mail Address</label>
-    <div class="controls">
-      <input type="text" name="email" value="{{dogowner.email}}">
-    </div>
+      <label class="control-label" for="last_name">Last Name</label>
+      <div class="controls">
+        <input type="text" name="last_name" value="{{dogowner.last_name}}">
+      </div>
     </div>
 
-     <div class="control-group">
-    <label class="control-label" for="emergency_contact">Emergency Contact</label>
-    <div class="controls">
-      <input type="text" name="emergency_contact" value="{{dogowner.emergency_contact}}">
-    </div>
+    <div class="control-group">
+      <label class="control-label" for="phone_number">Phone Number</label>
+      <div class="controls">
+        <input type="tel" name="phone_number" value="{{dogowner.phone_number}}">
+      </div>
     </div>
 
-  <div class="control-group">
-    <label class="control-label" for="contact_phone">Contact Phone Number</label>
-    <div class="controls">
-      <input type="text" name="contact_phone" value="{{dogowner.emergency_phone}}">
+    <div class="control-group">
+      <label class="control-label" for="email">E-mail Address</label>
+      <div class="controls">
+        <input type="text" name="email" value="{{dogowner.email}}">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="emergency_contact">Emergency Contact</label>
+      <div class="controls">
+        <input type="text" name="emergency_contact" value="{{dogowner.emergency_contact}}">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="contact_phone">Contact Phone Number</label>
+      <div class="controls">
+        <input type="text" name="contact_phone" value="{{dogowner.emergency_phone}}">
+      </div>
     </div>
   </div>
-  
-</div>
 
-<h4>Keep your pup info up-to-date.</h4>
+  <h4>Keep your pup info up-to-date.</h4>
 
-<div class="form-signin">
-<div class="control-group">
-    <label class="control-label" for="dog_name">Dog Name</label>
-    <div class="controls">
-    <input type="text" name="dog_name" value="{{dog.dog_name}}">
-    </div>
+  <div class="form-signin">
+    <div class="control-group">
+      <label class="control-label" for="dog_name">Dog Name</label>
+      <div class="controls">
+        <input type="text" name="dog_name" value="{{dog.dog_name}}">
+      </div>
     </div>
 
-   <div class="control-group">
-    <label class="control-label" for="sex">Dog Sex</label>
-    <div class="controls">
-    <input type="text" name="sex" value="{{dog.sex}}">
-    </div>
-    </div>
-
-     <div class="control-group">
-    <label class="control-label" for="breed">Dog Breed</label>
-    <div class="controls">
-    <input type="text" name="breed" value="{{dog.breed}}">
-    </div>
+    <div class="control-group">
+      <label class="control-label" for="sex">Dog Sex</label>
+      <div class="controls">
+        <input type="text" name="sex" value="{{dog.sex}}">
+      </div>
     </div>
 
- <div class="control-group">
-    <label class="control-label" for="vet_name">Veterinarian</label>
-    <div class="controls">
-      <input type="text" name="vet_name" value="{{dog.vet_name}}">
-    </div>
-    </div>
-
-     <div class="control-group">
-    <label class="control-label" for="vet_phone">Vet Phone</label>
-    <div class="controls">
-      <input type="tel" name="vet_phone" value="{{dog.vet_phone}}">
-    </div>
+    <div class="control-group">
+      <label class="control-label" for="breed">Dog Breed</label>
+      <div class="controls">
+        <input type="text" name="breed" value="{{dog.breed}}">
+      </div>
     </div>
 
-
-<div class="control-group">
-    <label class="control-label" for="needs">Dog Needs</label>
-    <div class="controls">
-    <textarea name ="needs" type="textarea" rows="5" value="{{dog.needs}}">
-    </textarea>
-    </div>
+    <div class="control-group">
+      <label class="control-label" for="vet_name">Veterinarian</label>
+      <div class="controls">
+        <input type="text" name="vet_name" value="{{dog.vet_name}}">
+      </div>
     </div>
 
-<div class="form-actions">
-  <button type="submit" class="btn btn-primary">Update Changes</button>
-</div>
-</form>
+    <div class="control-group">
+      <label class="control-label" for="vet_phone">Vet Phone</label>
+      <div class="controls">
+        <input type="tel" name="vet_phone" value="{{dog.vet_phone}}">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="needs">Dog Needs</label>
+      <div class="controls">
+        <textarea name ="needs" type="textarea" rows="5" value="{{dog.needs}}"></textarea>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Update Changes</button>
+    </div>
+  </form>
 </div>
 
 {% endblock %}
