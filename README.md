@@ -1,3 +1,3 @@
-Judgemental Eye: A Movie Rating App
+Doglog
 ===================================
-Head on over to [the tutorial](http://chriszf.github.com/ratings) for instructions.
+Doglog a web application that supports the mobile application.

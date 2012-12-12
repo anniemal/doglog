@@ -5,103 +5,103 @@
 <br>
 <h4>Tell us about the dogowner.</h4>
 <br>
-<div class="form-signin">
-<form  action='{{url_for ("save_owner")}}' method="POST">
-  <div class="control-group">
-    <label class="control-label" for="first_name">First Name</label>
-    <div class="controls">
-      <input type="text" name="first_name" placeholder="First Name">
-    </div>
-  </div>
 
-  <div class="control-group">
-    <label class="control-label" for="last_name">Last Name</label>
-    <div class="controls">
-      <input type="text" name="last_name" placeholder="Last Name">
-    </div>
+<div class="form-signin">
+  <form  action='{{url_for ("save_owner")}}' method="POST">
+
+    <div class="control-group">
+      <label class="control-label" for="first_name">First Name</label>
+      <div class="controls">
+        <input type="text" name="first_name" placeholder="First Name">
+      </div>
     </div>
 
     <div class="control-group">
-    <label class="control-label" for="phone_number">Phone Number</label>
-    <div class="controls">
-      <input type="tel" name="phone_number" placeholder="(xxx)xxx-xxxx">
-    </div>
-    </div>
-
-      <div class="control-group">
-    <label class="control-label" for="email">E-mail Address</label>
-    <div class="controls">
-      <input type="text" name="email" placeholder="dogowners.email@address.com">
-    </div>
+      <label class="control-label" for="last_name">Last Name</label>
+      <div class="controls">
+        <input type="text" name="last_name" placeholder="Last Name">
+      </div>
     </div>
 
-     <div class="control-group">
-    <label class="control-label" for="emergency_contact">Emergency Contact</label>
-    <div class="controls">
-      <input type="text" name="emergency_contact" placeholder="Friend/Family Name">
-    </div>
+    <div class="control-group">
+      <label class="control-label" for="phone_number">Phone Number</label>
+      <div class="controls">
+        <input type="tel" name="phone_number" placeholder="(xxx)xxx-xxxx">
+      </div>
     </div>
 
-  <div class="control-group">
-    <label class="control-label" for="contact_phone">Contact Phone Number</label>
-    <div class="controls">
-      <input type="text" name="contact_phone" placeholder="(xxx)xxx-xxxx">
+    <div class="control-group">
+      <label class="control-label" for="email">E-mail Address</label>
+      <div class="controls">
+        <input type="text" name="email" placeholder="dogowners.email@address.com">
+      </div>
     </div>
-  </div>
-  
-</div>
 
-<h4>Now introduce your pup to us...</h4>
-
-<div class="form-signin">
-<div class="control-group">
-    <label class="control-label" for="dog_name">Dog Name</label>
-    <div class="controls">
-    <input type="text" name="dog_name" placeholder="Pup's Name">
+    <div class="control-group">
+      <label class="control-label" for="emergency_contact">Emergency Contact</label>
+      <div class="controls">
+        <input type="text" name="emergency_contact" placeholder="Friend/Family Name">
+      </div>
     </div>
+
+    <div class="control-group">
+      <label class="control-label" for="contact_phone">Contact Phone Number</label>
+      <div class="controls">
+        <input type="text" name="contact_phone" placeholder="(xxx)xxx-xxxx">
+      </div>
+    </div>
+
+
+
+     <h4>Now introduce your pup to us...</h4>
+
+    <div class="control-group">
+      <label class="control-label" for="dog_name">Dog Name</label>
+      <div class="controls">
+        <input type="text" name="dog_name" placeholder="Pup's Name">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="sex">Dog Sex</label>
+      <div class="controls">
+        <input type="text" name="sex" placeholder="He or She?">
+      </div>
     </div>
 
    <div class="control-group">
-    <label class="control-label" for="sex">Dog Sex</label>
-    <div class="controls">
-    <input type="text" name="sex" placeholder="He or She?">
-    </div>
-    </div>
-
-     <div class="control-group">
-    <label class="control-label" for="breed">Dog Breed</label>
-    <div class="controls">
-    <input type="text" name="breed" placeholder="What kind of dog is Molly/Xena?">
-    </div>
+      <label class="control-label" for="breed">Dog Breed</label>
+      <div class="controls">
+        <input type="text" name="breed" placeholder="What kind of dog is Molly/Xena?">
+      </div>
     </div>
 
- <div class="control-group">
-    <label class="control-label" for="vet_name">Veterinarian</label>
-    <div class="controls">
-      <input type="text" name="vet_name" placeholder="Vet's name/animal hospital">
-    </div>
-    </div>
-
-     <div class="control-group">
-    <label class="control-label" for="vet_phone">Vet Phone</label>
-    <div class="controls">
-      <input type="tel" name="vet_phone" placeholder="Vet Phone (xxx)xxx-xxxx">
-    </div>
+    <div class="control-group">
+      <label class="control-label" for="vet_name">Veterinarian</label>
+      <div class="controls">
+        <input type="text" name="vet_name" placeholder="Vet's name/animal hospital">
+      </div>
     </div>
 
-
-<div class="control-group">
-    <label class="control-label" for="needs">Dog Needs</label>
-    <div class="controls">
-    <textarea name ="needs" type="textarea" rows="5" placeholder="Enter dog's feeding needs/water/medication requirements.">
-    </textarea>
-    </div>
+    <div class="control-group">
+      <label class="control-label" for="vet_phone">Vet Phone</label>
+      <div class="controls">
+        <input type="tel" name="vet_phone" placeholder="Vet Phone (xxx)xxx-xxxx">
+      </div>
     </div>
 
-<div class="form-actions">
-  <button type="submit" class="btn btn-primary">Submit</button>
-</div>
-</form>
+    <div class="control-group">
+      <label class="control-label" for="needs">Dog Needs</label>
+      <div class="controls">
+        <textarea name ="needs" type="textarea" rows="5" placeholder="Enter dog's feeding needs/water/medication requirements.">
+        </textarea>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
 </div>
 
 {% endblock %}

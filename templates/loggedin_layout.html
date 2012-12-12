@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,8 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <!-- Le styles -->
     <link href="/static/css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
       body {
@@ -75,68 +72,47 @@
     var json_walks = {{json_walks|safe}}; 
     </script>
     <script type="text/javascript" src="/static/js/log_detail.js"></script>
-    <script type="text/javascript"
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUSWiuAj-w8Cz7CV0JwpTmWVI9TnyaK6Y&sensor=false"> </script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUSWiuAj-w8Cz7CV0JwpTmWVI9TnyaK6Y&sensor=false"> 
+    </script>
 </head>
-  <p>
-    <div class="navbar navbar-inverse navbar-fixed-top">
 
-      <div class="navbar-inner">
-         
-        <div class="container-fluid">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="{{url_for('log')}}">dog log</a>
-
-          <div class="nav-collapse collapse">
-                <img src="/static/img/branchheader.png" id= "header_bar">
-            <p class="navbar-text pull-right">
-              Loggin' as <a href="{{url_for('user_info')}}" class="navbar-link">{{first_name}}</a>
-            </p>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
+<div class="navbar navbar-inverse navbar-fixed-top"> 
+  <div class="navbar-inner">      
+    <div class="container-fluid">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="{{url_for('log')}}">dog log</a>
+      <div class="nav-collapse collapse">
+        <img src="/static/img/branchheader.png" id= "header_bar">
+          <p class="navbar-text pull-right"> 
+            Loggin' as <a href="{{url_for('user_info')}}" class="navbar-link">{{first_name}}</a>
+          </p>
+      </div><!--/.nav-collapse -->
     </div>
-   <!--  <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span3">
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              {% for owner in owners %}
-                <li class="nav-header"> {{ owner.first_name }} {{ owner.last_name }}</li>
-                {% for value in dogs[owner.id] %}
-                <li class="active"><a href="{{ url_for('dog_info', owner_id=owner.id, dog_id=value.id) }}"> {{value.dog_name}} </a></li>
-                {% endfor %}
-              {% endfor %}
-            </ul>
+  </div>
+</div>
 
-          </div><!/.well -->
-<!-- 
-        </div><!/span-->
-    
-    <body>
-       
-        <div class="container">
+<body>
+  <div class="container">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+          {% for message in messages %}
+            {{ message }}
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
 
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    <ul class=flashes>
-                        {% for message in messages %}
-                            {{ message }}
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            {% endwith %}
+    {% block body %}
+    {% endblock %}
 
-            {% block body %}
-            {% endblock %}
-
-        </div>
-    </body>
-    <div style="position:relative;">
-     <img style="position:absolute;margin-left:auto;margin-right:auto" src="/static/img/footerGrass.jpg">
-    </div>
+  </div>
+</body>
+<div style="position:relative;">
+  <img style="position:absolute;margin-left:auto;margin-right:auto" src="/static/img/footerGrass.jpg">
+</div>
 </html>
