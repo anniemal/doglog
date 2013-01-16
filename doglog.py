@@ -18,9 +18,6 @@ SECRET_KEY = 'power_pose'
 app = Flask(__name__)
 app.config.from_object(__name__)
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
-# db=SQLAlchemy(app)
-
 @app.route("/")
 def index():
     error = ""
@@ -39,30 +36,35 @@ def logout():
 def authenticate():
         email = request.form['email']
         password = request.form['password']
-        ## Check to see if user is a dogwalker
-        results = model.session.query(model.DogWalker).filter(model.DogWalker.email==email).filter(model.DogWalker.password==password).all()
+
+        results = model.session.query(model.DogWalker).filter(model.DogWalker.email==email).\
+            filter(model.DogWalker.password==password).all()
+
         if len(results) == 1:
             logged_in_user=results[0]
-            print logged_in_user
             if logged_in_user:
                 session['user_id']=logged_in_user.id
-                return redirect ("/log")
+                first_name, owners_id, dogs, owners, user_id, user = get_sidebar()
+
+                walk=model.session.query(model.Walk).\
+                    filter(model.Walk.dog_walker_id==logged_in_user.id).order_by(desc(model.Walk.id)).first()
+
+                walk_str= str(walk.id)
+                return redirect('past_log/'+ walk_str)
         else:
-            error="Sorry, wrong email address/password. Please re-try logging in, or create a new account."
+            error="Sorry, wrong email address/password. Please re-try logging in,\
+                 or create a new account."
             return render_template("/index.html", error=error)  
 
 @app.route("/m_authenticate", methods=["GET","POST"])
 def m_authenticate():
-    print "here"
-    print request.form
     email = request.form['email']
-    password = request.form['password']
-    print email
-    print password  
-    results = model.session.query(model.DogWalker).filter(model.DogWalker.email==email).filter(model.DogWalker.password==password).all()
+    password = request.form['password']  
+    results = model.session.query(model.DogWalker).\
+    filter(model.DogWalker.email==email).filter(model.DogWalker.password==password).all()
+
     if len(results) == 1:
         logged_in_user=results[0]
-        print logged_in_user
         if logged_in_user:
             logged_in_user_id=jsonify(user_id=logged_in_user.id)
             session['user_id']=logged_in_user.id
@@ -89,7 +91,8 @@ def save_user():
     password=request.form['input_password']
     print email
     print password
-    new_user=model.DogWalker(first_name=first_name,last_name=last_name,company_name=company_name,phone_number=phone_number,email=email,password=password)
+    new_user=model.DogWalker(first_name=first_name,last_name=last_name,company_name=company_name,\
+        phone_number=phone_number,email=email,password=password)
     model.session.add(new_user)
     model.session.commit()
     session['user_id']=new_user.id
@@ -103,64 +106,43 @@ def m_save_user():
     phone_number=request.form['phone']
     email=request.form['email']
     password=request.form['password']
-    print email
-    print password
-    new_user=model.DogWalker(first_name=first_name,last_name=last_name,company_name=company_name,phone_number=phone_number,email=email,password=password)
+    new_user = model.DogWalker(first_name = first_name, last_name = last_name,\
+        company_name = company_name, phone_number = phone_number,email=email,password=password)
     model.session.add(new_user)
     model.session.commit()
     new_user_id=jsonify(user_id=new_user.id)
     session['user_id']=new_user.id
-    print new_user_id
-    print new_user.id
-    return new_user_id
-
+    
 @app.route("/m_save_owner", methods=["GET","POST"])
 def m_save_owner():
-    print 'here'
-    print request.form
-    print request.form['first_name']
-    print  'here too'
+
     first_name=request.form['first_name']
-    print first_name
     last_name=request.form['last_name']
-    print last_name
     phone_number=request.form['phone_number']
-    print phone_number
     email=request.form['email']
-    print email
     emergency_contact=request.form['emergency_contact']
-    print emergency_contact
     contact_phone=request.form['contact_phone']
-    print contact_phone
     vet_name=request.form['vet_name']
-    print vet_name
     vet_phone=request.form['vet_phone']
-    print vet_phone
-    new_owner=model.DogOwner(first_name=first_name,last_name=last_name,phone_number=phone_number,email=email, emergency_contact=emergency_contact,\
-        contact_phone=contact_phone,vet_name=vet_name,vet_phone=vet_phone,dogwalker_id=session['user_id'])
-    print new_owner.id
+    new_owner=model.DogOwner(first_name = first_name, last_name = last_name,\
+        phone_number = phone_number, email = email, emergency_contact = emergency_contact,\
+        contact_phone = contact_phone,vet_name = vet_name, vet_phone = vet_phone,\
+        dogwalker_id = session['user_id'])
     model.session.add(new_owner)
     model.session.commit()
     new_owner_id=jsonify(owner_id=new_owner.id)
-    print new_owner_id
     return new_owner_id
 
 @app.route("/m_save_dog", methods=["GET","POST"])
 def m_save_dog():
-    dog_name=request.form['dog_name']
-    print dog_name
-    breed=request.form['breed']
-    print breed
-    needs=request.form['needs']
-    print needs
-    sex=request.form['sex']
-    print sex
-    new_dog=model.Dog(dog_name=dog_name,breed=breed,needs=needs,sex=sex)
+    dog_name = request.form['dog_name']
+    breed = request.form['breed']
+    needs = request.form['needs']
+    sex = request.form['sex']
+    new_dog = model.Dog(dog_name = dog_name, breed = breed,needs = needs, sex = sex)
     model.session.add(new_dog)
     model.session.commit()
-    new_dog_id=jsonify(dog_id=new_dog.id)
-    print new_dog_id
-    print new_dog.id
+    new_dog_id = jsonify(dog_id = new_dog.id)
     return new_dog_id
 
 @app.route("/m_save_map", methods=["GET", "POST"])
@@ -190,6 +172,19 @@ def m_save_map():
         end_time=end_time,walk_location=walk_location,elapsed_distance=elapsed_distance,elapsed_time=elapsed_time, events=event_data, walk_pic_url=walk_pic_url)
     model.session.add(new_walk)
     model.session.commit()
+    twilio_message(elapsed_distance.encode('utf-8'), elapsed_time.encode('utf-8'))
+    # owner=model.session.query(model.DogOwner).filter_by(dogwalker_id=dog_walker_id).one()
+    # dog=model.session.query(model.Dog).filter_by(owner_id=owner.id).one()
+    # account = "AC7225c1d30d2cce103ea56289e3fc6ed8"
+    # token = "6efbc4e502a9672e69fddf93c981cbbe"
+    # client = TwilioRestClient(account, token)
+    # message_str="%s walked for %s miles for %s time." % (dog.dog_name.encode('utf-8'), elapsed_distance.encode('utf-8'), elapsed_time.encode('utf-8'))
+    # dogowner_phone="+1%s" %(owner.phone_number)
+    # message = client.sms.messages.create(to=dogowner_phone, from_="+14155994769", body=message_str) 
+    
+    return "success"
+
+def twilio_message(distance, time):
     owner=model.session.query(model.DogOwner).filter_by(dogwalker_id=dog_walker_id).one()
     dog=model.session.query(model.Dog).filter_by(owner_id=owner.id).one()
     account = "AC7225c1d30d2cce103ea56289e3fc6ed8"
@@ -199,6 +194,7 @@ def m_save_map():
     dogowner_phone="+1%s" %(owner.phone_number)
     message = client.sms.messages.create(to=dogowner_phone, from_="+14155994769", body=message_str) 
     return "success"
+
 
 @app.route("/add_owner",methods=["GET","POST"])
 def add_owner():
@@ -236,9 +232,10 @@ def save_owner():
     new_dog=model.Dog(owner_id=new_owner.id,dog_name=dog_name,sex=sex,breed=breed,needs=needs)
     model.session.add(new_dog)
     model.session.commit()
-    tup=get_sidebar()
-    return render_template("log_log.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
-            user_id=tup[4], user=tup[5])
+    # tup=get_sidebar()
+    first_name,owners_id,dogs,owners,user_id,user=get_sidebar()
+    return render_template("log_log.html",first_name=first_name,owners_id=owners_id,dogs=dogs,owners=owners,\
+            user_id=user_id, user=user)
 
 def get_sidebar():
     user_id=session['user_id']
@@ -311,44 +308,6 @@ def owner_info():
     return render_template("owner_info.html", first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
             user_id=tup[4], user=tup[5])
 
-@app.route("/log")
-def log():
-    tup=get_sidebar()
-    walks=model.session.query(model.Walk).filter_by(dog_walker_id=tup[4]).order_by(desc(model.Walk.id)).all()
-    new_time_list=[]
-    for walk in walks:
-
-          new_time=walk.start_time.strftime('%b %d at %H:%M')
-          new_time_list.append(new_time)
-
-    if walks:
-        walk=walks[0]
-        walk_as_dict = { 
-            'walk_id': walk.id, \
-            'dog_walker_id' : walk.dog_walker_id, \
-            'obedience_rating' : walk.obedience_rating, \
-            'dog_mood' : walk.dog_mood, \
-            'start_time' : str(walk.start_time), \
-            'end_time' : str(walk.end_time), \
-            'walk_location' : walk.walk_location, \
-            'elapsed_distance' :walk.elapsed_distance, \
-            'elapsed_time' : walk.elapsed_time, \
-            'events' : walk.events, \
-            'walk_pic_url' : walk.walk_pic_url}
-        json_walks=json.dumps(walk_as_dict)
-        date=str(walk.start_time)[0:10]
-        time=str(walk.start_time)[11:-3]
-        new_time=walk.start_time.strftime('%b %d at %H:%M')
-        print new_time
-        elapsed_time=str(walk.elapsed_time)[0:-3]
-        return render_template("log_log.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
-            user_id=tup[4], json_walks=json_walks, elapsed_time=elapsed_time, obedience_rating=walk_as_dict['obedience_rating'], \
-            dog_mood=walk_as_dict['dog_mood'], elapsed_distance=walk_as_dict['elapsed_distance'], walk_pic_url=walk_as_dict['walk_pic_url'], walks=walks,\
-            start_time=time, date=date, new_time_list=new_time_list)
-    else: 
-        return render_template("get_app.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
-            user_id=tup[4])
-
 @app.route("/get_app")
 def get_app():
     return render_template("get_app.html")
@@ -385,8 +344,7 @@ def past_log(walk_id):
         elapsed_time=str(walk.elapsed_time)[0:-3]
         return render_template("log_log.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
             user_id=tup[4], json_walks=json_walks, elapsed_time=elapsed_time, obedience_rating=walk_as_dict['obedience_rating'], \
-            dog_mood=walk_as_dict['dog_mood'], elapsed_distance=walk_as_dict['elapsed_distance'], walk_pic_url=walk_as_dict['walk_pic_url'], walks=walks,\
-            start_time=time, date=date, compare_id=walk_id, new_time_list=new_time_list)
+            dog_mood=walk_as_dict['dog_mood'], elapsed_distance=walk_as_dict['elapsed_distance'], walk_pic_url=walk_as_dict['walk_pic_url'], walks=walks,start_time=time, date=date, compare_id=walk_id, new_time_list=new_time_list)
     else:
         return render_template("get_app.html",first_name=tup[0],owners_id=tup[1],dogs=tup[2],owners=tup[3],\
             user_id=tup[4])

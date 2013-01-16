@@ -11,11 +11,7 @@ var frenemy_image='../static/img/dog_sad.gif';
 var lat_lng=[];
 
 // Find the track_id of the workout they are viewing
-	console.log(json_walks);
-
-	// data = JSON.parse(json_walks);
 	data = json_walks;
-	
 	events=data['events'];
 	events=JSON.parse(events);
 	console.log(events);
