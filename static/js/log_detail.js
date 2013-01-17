@@ -32,8 +32,8 @@ function make_marker(event_type, event_icon, map) {
 function make_path(tracking_data, lat_lng) {
     for (var i = 0; i < tracking_data.length; i++) {
         start_walk = tracking_data[i];
-        lat = start_walk['ab'];
-        lng = start_walk['$a'];
+        lat = start_walk['Ya'];
+        lng = start_walk['Za'];
         // myLatLng = new google.maps.LatLng(lng, lat);
         myLatLng = new google.maps.LatLng(lat, lng);
         lat_lng.push(myLatLng);
