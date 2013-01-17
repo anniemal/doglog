@@ -3,7 +3,6 @@ Flask==0.9
 Flask-SQLAlchemy==0.16
 Flask-WTF==0.8
 Jinja2==2.6
-PIL==1.1.7
 PyJWT==0.1.2
 PyYAML==3.10
 Pygments==1.5
@@ -13,18 +12,15 @@ Werkzeug==0.8.3
 catkin-pkg==0.1.8
 distribute==0.6.32
 httplib2==0.7.7
-matplotlib==1.2.0
 mercurial==2.4.1
 newrelic==1.9.0.21
 nose==1.2.1
-numpy==1.6.2
 psycopg2==2.4.6
 python-dateutil==2.1
 pytz==2012h
 rosdep==0.10.11
 rosinstall==0.6.22
 rospkg==1.0.16
-six==1.2.0
 twilio==3.4.1
 vcstools==0.1.26
 virtualenv==1.8.4
