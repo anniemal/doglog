@@ -12,7 +12,6 @@ WTForms==1.0.2
 Werkzeug==0.8.3
 catkin-pkg==0.1.8
 distribute==0.6.32
-empy==3.1
 httplib2==0.7.7
 matplotlib==1.2.0
 mercurial==2.4.1
