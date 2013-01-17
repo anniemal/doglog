@@ -34,7 +34,8 @@ function make_path(tracking_data, lat_lng) {
         start_walk = tracking_data[i];
         lat = start_walk['ab'];
         lng = start_walk['$a'];
-        myLatLng = new google.maps.LatLng(lng, lat);
+        // myLatLng = new google.maps.LatLng(lng, lat);
+        myLatLng = new google.maps.LatLng(lat, lng);
         lat_lng.push(myLatLng);
     }
     var new_path = new google.maps.Polyline({
