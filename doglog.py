@@ -145,7 +145,8 @@ def m_save_dog():
     return new_dog_id
 
 @app.route("/m_save_map", methods = ["GET", "POST"])
-def m_save_map():   
+def m_save_map():
+    print "got to start of save_map"
     string_json = request.form['json_vals']
     json_obj = json.loads(string_json)
     dog_walker_id = json_obj['dogwalker_id']
@@ -163,13 +164,14 @@ def m_save_map():
     event_data = json.dumps(event_data)
     walk_pic_url = json_obj['walk_pic_url']
     walk_pic_url = 'kjsdf'
-
+    print "got data out"
     new_walk = model.Walk(dog_walker_id = dog_walker_id, obedience_rating = obedience_rating,\
         dog_mood = dog_mood,start_time = start_time, end_time = end_time,\
         walk_location = walk_location, elapsed_distance = elapsed_distance,\
         elapsed_time = elapsed_time, events = event_data, walk_pic_url = walk_pic_url)
     model.session.add(new_walk)
     model.session.commit()
+    print "got to before twilio"
     twilio_message(elapsed_distance.encode('utf-8'), elapsed_time.encode('utf-8'),dogwalker_id)
     # owner=model.session.query(model.DogOwner).filter_by(dogwalker_id=dog_walker_id).one()
     # dog=model.session.query(model.Dog).filter_by(owner_id=owner.id).one()
