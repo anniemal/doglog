@@ -1,1 +1,1 @@
-web: python doglog.py
+web: newrelic-admin run-program python doglog.py

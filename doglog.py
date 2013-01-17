@@ -11,6 +11,8 @@ from datetime import datetime
 import string
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy import desc
+import newrelic.agent
+newrelic.agent.initialize('newrelic.ini')
 
 
 SECRET_KEY = 'power_pose'
