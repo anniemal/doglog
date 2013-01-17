@@ -170,7 +170,7 @@ def m_save_map():
         elapsed_time = elapsed_time, events = event_data, walk_pic_url = walk_pic_url)
     model.session.add(new_walk)
     model.session.commit()
-    twilio_message(elapsed_distance.encode('utf-8'), elapsed_time.encode('utf-8'))
+    twilio_message(elapsed_distance.encode('utf-8'), elapsed_time.encode('utf-8'),dogwalker_id)
     # owner=model.session.query(model.DogOwner).filter_by(dogwalker_id=dog_walker_id).one()
     # dog=model.session.query(model.Dog).filter_by(owner_id=owner.id).one()
     # account = "AC7225c1d30d2cce103ea56289e3fc6ed8"
@@ -182,14 +182,14 @@ def m_save_map():
     
     return "success"
 
-def twilio_message(distance, time):
+def twilio_message(distance, time, dog_walker_id):
     owner = model.session.query(model.DogOwner).filter_by(dogwalker_id = dog_walker_id).one()
     dog = model.session.query(model.Dog).filter_by(owner_id = owner.id).one()
     account = "AC7225c1d30d2cce103ea56289e3fc6ed8"
     token = "6efbc4e502a9672e69fddf93c981cbbe"
     client = TwilioRestClient(account, token)
     message_str = "%s walked for %s miles for %s time." % (dog.dog_name.encode('utf-8'),\
-        elapsed_distance.encode('utf-8'), elapsed_time.encode('utf-8'))
+        distance, time)
     dogowner_phone = "+1%s" %(owner.phone_number)
     message = client.sms.messages.create(to = dogowner_phone, from_ = "+14155994769",\
         body = message_str) 
