@@ -3,10 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy import Column, Integer, String, DateTime, Text, ForeignKey, Float, BigInteger
 from sqlalchemy.orm import sessionmaker, relationship, backref, scoped_session
 import os
-# engine = create_engine('sqlite:///doglog.db', echo=True)
-# engine = create_engine('postgres://nbnuegzevwjkmo:RQI2BlBCzwJC7IC7lWObacrwEi@ec2-23-21-176-133.compute-1.amazonaws.com:5432/d5d5pi8c5rbhue', echo=True)
 
-# engine = create_engine('postgresql+psycopg2://kaboomboom:letterscleo@localhost:5432/doglog', echo=True)
 db_uri = os.environ.get("DATABASE_URL", 'postgresql://localhost:5432/doglog')
 engine = create_engine(db_uri, echo = False)
 session = scoped_session(sessionmaker(bind=engine, autocommit=False, autoflush=False))
