@@ -341,7 +341,7 @@ def past_log(walk_id):
         new_time = walk.start_time.strftime('%b %d at %H:%M')
         json_walks=json.dumps(walk_as_dict)
         elapsed_time=str(walk.elapsed_time)[0:-3]
-        return render_template("log_log.html",first_name = first_name, owners_id = owner_id,\
+        return render_template("log_log.html",first_name = first_name, owners_id = owners_id,\
             dogs = dogs, owners = owners, user_id = user_id, json_walks = json_walks,\
             elapsed_time = elapsed_time, obedience_rating = walk_as_dict['obedience_rating'], \
             dog_mood = walk_as_dict['dog_mood'], elapsed_distance = walk_as_dict['elapsed_distance'],\
