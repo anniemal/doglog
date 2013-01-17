@@ -164,6 +164,9 @@ def m_save_map():
     event_data = json.dumps(event_data)
     walk_pic_url = json_obj['walk_pic_url']
     walk_pic_url = 'kjsdf'
+    print event_data
+    print "space"
+    print walk_location
     print "got data out"
     new_walk = model.Walk(dog_walker_id = dog_walker_id, obedience_rating = obedience_rating,\
         dog_mood = dog_mood,start_time = start_time, end_time = end_time,\
@@ -172,7 +175,7 @@ def m_save_map():
     model.session.add(new_walk)
     model.session.commit()
     print "got to before twilio"
-    twilio_message(elapsed_distance.encode('utf-8'), elapsed_time.encode('utf-8'),dogwalker_id)
+    twilio_message(elapsed_distance.encode('utf-8'), elapsed_time.encode('utf-8'),dog_walker_id)
     # owner=model.session.query(model.DogOwner).filter_by(dogwalker_id=dog_walker_id).one()
     # dog=model.session.query(model.Dog).filter_by(owner_id=owner.id).one()
     # account = "AC7225c1d30d2cce103ea56289e3fc6ed8"
