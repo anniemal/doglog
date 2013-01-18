@@ -241,9 +241,7 @@ def save_owner():
     model.session.commit()
     # tup=get_sidebar()
     first_name,owners_id,dogs,owners,user_id,user=get_sidebar()
-    return render_template("log_log.html",first_name =first_name,owners_id = owners_id,\
-        dogs = dogs,owners = owners, user_id = user_id, user = user)
-
+    return render_template("get_app.html")
 def get_sidebar():
     user_id = session['user_id']
     user = model.session.query(model.DogWalker).get(user_id)
